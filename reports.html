@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reports - The Precision Ledger</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary": "#536167",
+              "tertiary-fixed-dim": "#ffb873",
+              "surface-tint": "#176684",
+              "surface-dim": "#d8dadb",
+              "on-tertiary-fixed": "#2d1600",
+              "on-secondary-fixed-variant": "#3b494f",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f2f4f5",
+              "on-tertiary": "#ffffff",
+              "on-background": "#191c1d",
+              "on-secondary-fixed": "#101d23",
+              "tertiary-fixed": "#ffdcbf",
+              "on-error": "#ffffff",
+              "surface-variant": "#e1e3e4",
+              "tertiary": "#6d3d00",
+              "outline": "#707880",
+              "on-surface": "#191c1d",
+              "primary": "#004f69",
+              "surface-container-highest": "#e1e3e4",
+              "secondary-container": "#d6e5ec",
+              "on-tertiary-fixed-variant": "#6a3b00",
+              "on-secondary": "#ffffff",
+              "primary-container": "#1a6886",
+              "inverse-on-surface": "#eff1f2",
+              "surface-container-lowest": "#ffffff",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#8dcff2",
+              "error-container": "#ffdad6",
+              "on-tertiary-container": "#ffd5b0",
+              "on-secondary-container": "#58676d",
+              "secondary-fixed-dim": "#bac9d0",
+              "secondary-fixed": "#d6e5ec",
+              "primary-fixed-dim": "#8dcff2",
+              "outline-variant": "#c0c7d0",
+              "background": "#f8fafb",
+              "surface": "#f8fafb",
+              "tertiary-container": "#8f5201",
+              "on-primary-fixed-variant": "#004d66",
+              "on-primary-fixed": "#001e2b",
+              "surface-container": "#eceeef",
+              "on-surface-variant": "#40484f",
+              "surface-container-high": "#e6e8e9",
+              "surface-bright": "#f8fafb",
+              "error": "#ba1a1a",
+              "inverse-surface": "#2e3132",
+              "primary-fixed": "#c1e8ff",
+              "on-primary-container": "#b1e3ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        background-color: rgba(225, 227, 228, 0.8);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #c0c7d0;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed-dim">
+
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-200/50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-950 flex flex-col h-full py-4 gap-1 z-50 overflow-y-auto custom-scrollbar">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</div>
+<div>
+<h1 class="font-bold text-lg text-cyan-900 dark:text-cyan-50 font-headline">The Precision Ledger</h1>
+<p class="text-[10px] uppercase tracking-widest text-secondary">Inventory Management</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-manrope text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-manrope text-sm font-medium">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">storage</span>
+<span class="font-manrope text-sm font-medium">Storage</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="inventory.html">
+<span class="material-symbols-outlined">inventory</span>
+<span class="font-manrope text-sm font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-manrope text-sm font-medium">Suppliers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">input</span>
+<span class="font-manrope text-sm font-medium">Stock In</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">output</span>
+<span class="font-manrope text-sm font-medium">Stock Out</span>
+</a>
+<!-- Active: Reports -->
+<a class="flex items-center gap-3 px-4 py-3 bg-cyan-100/50 dark:bg-cyan-900/30 text-cyan-900 dark:text-cyan-100 rounded-lg mx-2 transition-all scale-[0.98] active:scale-95 duration-150" href="reports.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-manrope text-sm font-medium">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-manrope text-sm font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-manrope text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 py-4 mx-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm">
+<div class="flex items-center gap-3">
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDpmTUEsQvrwvZ1fT-xyiREzaBOPFbj2OFCtNkczz1uqHHOd4QbdjcM0CjpuqW3w-gmqByd3oGY_raSVCbq04sIOaDblVfZ48Cw2jXy4a_oCCbEFjR5Jckm5D5kVDbvAyL-vSAqcW1Kt3iHfB6Vg8datWPqdi8zquoqOGfCeOyUDjeqz60y4Oicz5t0MrtE5vaSz17cc1txmRZSijFvkN4tLAkddUWSKKX6OeUyVI9h2YQvevTfL-sPraPX6TfyT_-aVgrTt18pXfo"/>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">Alex Sterling</p>
+<p class="text-[10px] text-secondary truncate">Inventory Manager</p>
+</div>
+</div>
+</div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="ml-64 flex flex-col min-h-screen">
+    <!-- TopAppBar -->
+    <header class="sticky top-0 z-40 w-full border-b border-slate-200/50 dark:border-slate-800/50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none flex items-center justify-between px-8 h-16 w-full">
+        <div class="flex items-center gap-8 flex-1">
+            <div class="relative w-80">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">calendar_month</span>
+                <select class="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary outline-none cursor-pointer">
+                    <option>This Month (October)</option>
+                    <option>Last Month (September)</option>
+                    <option>This Year (2026)</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+                <span class="material-symbols-outlined">help</span>
+            </button>
+            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+                <span class="material-symbols-outlined">account_circle</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="p-8 space-y-8 max-w-7xl mx-auto w-full relative">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <h2 class="text-3xl font-extrabold font-headline tracking-tight text-primary">Reports &amp; Analytics</h2>
+                <p class="text-secondary mt-1">Movement and valuation metrics.</p>
+            </div>
+            <div class="flex gap-3">
+                <button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-highest text-primary font-semibold rounded-lg hover:bg-surface-container-high transition-colors active:scale-95">
+                    <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+                    <span>Export PDF</span>
+                </button>
+                <button class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-b from-green-600 to-green-700 text-white font-semibold rounded-lg shadow-lg shadow-green-600/20 transition-transform active:scale-95">
+                    <span class="material-symbols-outlined text-sm">table_view</span>
+                    <span>Export Excel</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Metrics Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100 relative">
+                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Total In/Out</p>
+                <div class="mt-2 flex gap-4">
+                    <div>
+                        <p class="text-[10px] text-green-600 font-bold mb-1 uppercase">Inbound</p>
+                        <h3 class="text-xl font-extrabold font-headline text-on-surface">5,420 <span class="text-xs text-secondary font-medium">units</span></h3>
+                    </div>
+                    <div class="w-px bg-slate-100"></div>
+                    <div>
+                        <p class="text-[10px] text-orange-600 font-bold mb-1 uppercase">Outbound</p>
+                        <h3 class="text-xl font-extrabold font-headline text-on-surface">3,110 <span class="text-xs text-secondary font-medium">units</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100">
+                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Top Performing Category</p>
+                <h3 class="text-2xl font-extrabold font-headline text-primary mt-2">Bearings</h3>
+                <p class="text-sm text-secondary mt-1">45% of total outbound volume.</p>
+            </div>
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100">
+                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Inventory Turnover Rate</p>
+                <h3 class="text-3xl font-extrabold font-headline text-primary mt-2">4.2</h3>
+                <p class="text-xs text-primary-fixed-dim mt-1 font-medium">Higher than industry average (3.8)</p>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-slate-50">
+                <h4 class="text-lg font-bold font-headline mb-4 text-on-surface">Inbound vs Outbound Trend</h4>
+                <div class="relative h-64 w-full">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-slate-50">
+                <h4 class="text-lg font-bold font-headline mb-4 text-on-surface">Stock by Category</h4>
+                <div class="relative h-64 w-full flex justify-center">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script>
+    // Initialize Chart.js
+    const ctxTrend = document.getElementById('trendChart').getContext('2d');
+    new Chart(ctxTrend, {
+        type: 'line',
+        data: {
+            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            datasets: [
+                {
+                    label: 'Inbound',
+                    data: [1200, 1900, 1000, 1320],
+                    borderColor: '#004f69',
+                    backgroundColor: 'rgba(0, 79, 105, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                },
+                {
+                    label: 'Outbound',
+                    data: [800, 1200, 1500, 810],
+                    borderColor: '#536167',
+                    borderDash: [5, 5],
+                    tension: 0.4
+                }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } } }
+    });
+
+    const ctxCategory = document.getElementById('categoryChart').getContext('2d');
+    new Chart(ctxCategory, {
+        type: 'doughnut',
+        data: {
+            labels: ['Bearings', 'Fluids', 'Machinery', 'Tools'],
+            datasets: [{
+                data: [45, 25, 20, 10],
+                backgroundColor: ['#004f69', '#1a6886', '#8dcff2', '#e1e3e4'],
+                borderWidth: 0
+            }]
+        },
+        options: { cutout: '70%', responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+    });
+</script>
+
+</body>
+</html>
