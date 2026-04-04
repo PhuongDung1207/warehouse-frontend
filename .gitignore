@@ -137,3 +137,7 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Rules and assignment files
+warehouse_rules_database_api.md
+phan-cong-chuc-nang-fe-be.md
