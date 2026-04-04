@@ -45,6 +45,28 @@
     window.localStorage.removeItem(SESSION_STORAGE_KEY);
   }
 
+  function buildQueryString(params) {
+    const query = new URLSearchParams();
+    const entries = params || {};
+
+    Object.keys(entries).forEach(function (key) {
+      const value = entries[key];
+
+      if (value === undefined || value === null || value === "") {
+        return;
+      }
+
+      query.set(key, String(value));
+    });
+
+    const serialized = query.toString();
+    return serialized ? "?" + serialized : "";
+  }
+
+  function withQuery(path, params) {
+    return path + buildQueryString(params);
+  }
+
   async function request(path, options) {
     const config = options || {};
     const headers = new Headers(config.headers || {});
@@ -60,7 +82,7 @@
 
     let response;
     try {
-      response = await fetch(path, {
+      response = await fetch(withQuery(path, config.query), {
         method: config.method || "GET",
         headers: headers,
         body:
@@ -85,6 +107,52 @@
     }
 
     return payload;
+  }
+
+  function getFilenameFromResponse(response, fallbackName) {
+    const disposition = response.headers.get("content-disposition") || "";
+    const matched = disposition.match(/filename="?([^"]+)"?/i);
+
+    if (matched && matched[1]) {
+      return matched[1];
+    }
+
+    return fallbackName || "download";
+  }
+
+  async function download(path, options) {
+    const config = options || {};
+    const headers = new Headers(config.headers || {});
+    const session = getStoredSession();
+
+    if (!config.skipAuth && session && session.accessToken) {
+      headers.set("Authorization", "Bearer " + session.accessToken);
+    }
+
+    const response = await fetch(withQuery(path, config.query), {
+      method: config.method || "GET",
+      headers: headers
+    });
+
+    if (!response.ok) {
+      const payload = await parseJsonSafely(response);
+      throw createApiError(
+        response.status,
+        (payload && payload.message) || response.statusText || "Download failed",
+        payload
+      );
+    }
+
+    const blob = await response.blob();
+    const objectUrl = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = objectUrl;
+    link.download = getFilenameFromResponse(response, config.filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(objectUrl);
   }
 
   async function login(credentials) {
@@ -130,17 +198,24 @@
     return payload.data;
   }
 
+  async function listSuppliersPage(query) {
+    return request("/api/v1/suppliers", {
+      query: query || {}
+    });
+  }
+
   async function listSuppliers() {
     const allSuppliers = [];
     let page = 1;
     let totalPages = 1;
 
     while (page <= totalPages) {
-      const payload = await request(
-        "/api/v1/suppliers?page=" +
-          page +
-          "&limit=100&sortBy=name&sortOrder=asc"
-      );
+      const payload = await listSuppliersPage({
+        page: page,
+        limit: 100,
+        sortBy: "name",
+        sortOrder: "asc"
+      });
 
       totalPages = (payload.meta && payload.meta.totalPages) || 1;
       Array.prototype.push.apply(allSuppliers, payload.data || []);
@@ -150,12 +225,108 @@
     return allSuppliers;
   }
 
+  function listCategories(query) {
+    return request("/api/v1/categories", {
+      query: query || {}
+    });
+  }
+
+  function listUnits(query) {
+    return request("/api/v1/units", {
+      query: query || {}
+    });
+  }
+
+  function createProduct(payload) {
+    return request("/api/v1/products", {
+      method: "POST",
+      body: payload
+    });
+  }
+
+  function listUsers(query) {
+    return request("/api/v1/users", {
+      query: query || {}
+    });
+  }
+
+  function getStocks(query) {
+    return request("/api/v1/stocks", {
+      query: query || {}
+    });
+  }
+
+  function getLowStocks(query) {
+    return request("/api/v1/stocks/low-stock", {
+      query: query || {}
+    });
+  }
+
+  function createStockCheck(payload) {
+    return request("/api/v1/stock-checks", {
+      method: "POST",
+      body: payload
+    });
+  }
+
+  function getDashboardReport() {
+    return request("/api/v1/reports/dashboard");
+  }
+
+  function getStockSummary(query) {
+    return request("/api/v1/reports/stock-summary", {
+      query: query || {}
+    });
+  }
+
+  function getStockInSummary(query) {
+    return request("/api/v1/reports/stock-in-summary", {
+      query: query || {}
+    });
+  }
+
+  function getStockOutSummary(query) {
+    return request("/api/v1/reports/stock-out-summary", {
+      query: query || {}
+    });
+  }
+
+  function getStockMovementChart(query) {
+    return request("/api/v1/reports/chart/stock-movement", {
+      query: query || {}
+    });
+  }
+
+  function getProducts(query) {
+    return request("/api/v1/products", {
+      query: query || {}
+    });
+  }
+
   app.api = {
+    buildQueryString: buildQueryString,
     clearSession: clearSession,
+    createProduct: createProduct,
+    createStockCheck: createStockCheck,
+    download: download,
     getCurrentUser: getCurrentUser,
+    getDashboardReport: getDashboardReport,
+    getLowStocks: getLowStocks,
+    getProducts: getProducts,
+    getStockInSummary: getStockInSummary,
+    getStockMovementChart: getStockMovementChart,
+    getStocks: getStocks,
+    getStockSummary: getStockSummary,
+    getStockOutSummary: getStockOutSummary,
     getStoredSession: getStoredSession,
+    listCategories: listCategories,
+    listUnits: listUnits,
     listSuppliers: listSuppliers,
+    listSuppliersPage: listSuppliersPage,
+    listUsers: listUsers,
     login: login,
-    logout: logout
+    logout: logout,
+    request: request,
+    saveSession: saveSession
   };
 })();

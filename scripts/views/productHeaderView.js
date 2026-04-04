@@ -9,7 +9,11 @@
           <p>Manage your industrial inventory and logistics flow</p>
         </div>
         <div class="page-actions">
-          <button class="primary-button" type="button">
+          <button
+            class="primary-button"
+            type="button"
+            data-href="/pages/inventory/inventory.html"
+          >
             <span class="button-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24">
                 <path d="M12 5v14M5 12h14" />
