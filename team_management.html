@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team Management - The Precision Ledger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#e6e8e9",
+              "on-primary-fixed-variant": "#004d66",
+              "inverse-on-surface": "#eff1f2",
+              "on-secondary": "#ffffff",
+              "background": "#f8fafb",
+              "tertiary-fixed": "#ffdcbf",
+              "primary-container": "#1a6886",
+              "surface-container": "#eceeef",
+              "on-primary": "#ffffff",
+              "surface-tint": "#176684",
+              "on-secondary-container": "#58676d",
+              "surface-dim": "#d8dadb",
+              "outline-variant": "#c0c7d0",
+              "primary": "#004f69",
+              "on-primary-fixed": "#001e2b",
+              "on-surface-variant": "#40484f",
+              "inverse-primary": "#8dcff2",
+              "on-error-container": "#93000a",
+              "on-tertiary": "#ffffff",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed": "#2d1600",
+              "on-secondary-fixed": "#101d23",
+              "on-background": "#191c1d",
+              "secondary-container": "#d6e5ec",
+              "tertiary": "#6d3d00",
+              "surface-variant": "#e1e3e4",
+              "secondary-fixed-dim": "#bac9d0",
+              "secondary-fixed": "#d6e5ec",
+              "surface-container-highest": "#e1e3e4",
+              "tertiary-fixed-dim": "#ffb873",
+              "surface-bright": "#f8fafb",
+              "secondary": "#536167",
+              "on-secondary-fixed-variant": "#3b494f",
+              "surface-container-low": "#f2f4f5",
+              "on-tertiary-fixed-variant": "#6a3b00",
+              "primary-fixed": "#c1e8ff",
+              "on-error": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-container": "#8f5201",
+              "primary-fixed-dim": "#8dcff2",
+              "surface": "#f8fafb",
+              "on-primary-container": "#b1e3ff",
+              "outline": "#707880",
+              "error-container": "#ffdad6",
+              "on-surface": "#191c1d",
+              "on-tertiary-container": "#ffd5b0",
+              "inverse-surface": "#2e3132"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8fafb;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #c0c7d0;
+        border-radius: 10px;
+      }</style>
+</head>
+<body class="text-on-surface antialiased">
+<!-- SideNavBar (Authority: JSON) -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-200/50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-950 flex flex-col h-full py-4 gap-1 z-50 overflow-y-auto custom-scrollbar"><div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</div>
+<div>
+<h1 class="font-bold text-lg text-cyan-900 dark:text-cyan-50 font-headline">The Precision Ledger</h1>
+<p class="text-[10px] uppercase tracking-widest text-secondary">Inventory Management</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-manrope text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-manrope text-sm font-medium">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">storage</span>
+<span class="font-manrope text-sm font-medium">Storage</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">inventory</span>
+<span class="font-manrope text-sm font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-manrope text-sm font-medium">Suppliers</span>
+</a>
+<!-- Active State: Users -->
+<a class="flex items-center gap-3 px-4 py-3 bg-cyan-100/50 dark:bg-cyan-900/30 text-cyan-900 dark:text-cyan-100 rounded-lg mx-2 transition-all scale-[0.98] active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-manrope text-sm font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-manrope text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 py-4 mx-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm">
+<div class="flex items-center gap-3">
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDpmTUEsQvrwvZ1fT-xyiREzaBOPFbj2OFCtNkczz1uqHHOd4QbdjcM0CjpuqW3w-gmqByd3oGY_raSVCbq04sIOaDblVfZ48Cw2jXy4a_oCCbEFjR5Jckm5D5kVDbvAyL-vSAqcW1Kt3iHfB6Vg8datWPqdi8zquoqOGfCeOyUDjeqz60y4Oicz5t0MrtE5vaSz17cc1txmRZSijFvkN4tLAkddUWSKKX6OeUyVI9h2YQvevTfL-sPraPX6TfyT_-aVgrTt18pXfo"/>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">Alex Sterling</p>
+<p class="text-[10px] text-secondary truncate">Inventory Manager</p>
+</div>
+</div>
+</div></aside>
+<!-- TopNavBar (Authority: JSON) -->
+<header class="fixed top-0 right-0 left-0 md:left-64 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl flex justify-between items-center h-16 px-8 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400" placeholder="Search team members..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-slate-500 hover:text-primary transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-500 hover:text-primary transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-slate-200">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional man in a minimalist office setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwzuhJ-3d_i0QGoLfMgSMnS8jEELOi_NOVOWTpLc_yoJ4xzvSG2zi3m2JH1_Nx33DbfK_7bl_TnHSFTpNd-zjvZrRazDIh3X_-9Zl4R_F8vBWj3kraulNaFX4oPR2IpTlJ_8y5H-y1WPSFsVrx7W5mY5T0bPtnNCewUC6chkYOWph5YcJ8BzD4KQE3U-PuLxnkSSoBVvPKFreL9v4OLjvVDN-o89mboJ68_ocOEt45fAv-p8uS9N9-dfRV8VIEiub15S79aXPfhI90"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-12 px-8 md:ml-64 min-h-screen bg-surface">
+<div class="max-w-7xl mx-auto">
+<!-- Page Header (Editorial Authority) -->
+<div class="mb-12">
+<h2 class="font-headline text-4xl font-extrabold tracking-tight text-primary mb-2">Team Management</h2>
+<p class="text-secondary font-body">Manages permissions and monitor activity across your logistics infrastructure.</p>
+</div>
+<!-- Stats Bento Grid (High-End Pattern) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+<div class="col-span-1 md:col-span-2 bg-surface-container-lowest rounded-xl p-6 shadow-[0_32px_64px_-12px_rgba(0,0,0,0.06)] flex items-center justify-between overflow-hidden relative group">
+<div>
+<p class="text-secondary text-sm font-medium mb-1">Total Staff</p>
+<h3 class="font-headline text-5xl font-extrabold text-primary">24</h3>
+<p class="text-primary-container text-xs mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span>
+                            +2 this month
+                        </p>
+</div>
+<div class="opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl" data-icon="groups">groups</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col justify-between">
+<div>
+<p class="text-secondary text-sm font-medium mb-1">Active Now</p>
+<div class="flex items-center gap-3">
+<h3 class="font-headline text-4xl font-bold text-on-surface">18</h3>
+<span class="flex h-3 w-3 rounded-full bg-primary animate-pulse"></span>
+</div>
+</div>
+<div class="flex -space-x-2 mt-4">
+<div class="h-8 w-8 rounded-full border-2 border-white overflow-hidden bg-slate-100">
+<img alt="Avatar" data-alt="portrait of a smiling woman with glasses in a professional environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfRkUQdgi4VANem1WpaeI5tr4FHkFNBWGurP3jCT5qFYtHOSI8oPxT19YKZ58ucePtg86wvzfojGbQT5YhflZIHkRqhf3IIzZw3fdBoAMQhWE-rvmz_LrBLr6EZeOj7Tk_TEaKM1SHUfAdO2ZdA7NpwYBnBrz2yFUJX_7j9E-kVMvpCjfdZmIkO-M1SivLFbxe5cR8cHpJRs7sL7lSU1EyzAiB0slOp8dTfUZWfW6aX3NMWZr2A8vPyWvypT5kxyHI6KWGqipLqo6R"/>
+</div>
+<div class="h-8 w-8 rounded-full border-2 border-white overflow-hidden bg-slate-100">
+<img alt="Avatar" data-alt="portrait of a male designer with beard in a sunlit studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJoX0SlXWRjYFqDg_BbiwS-JRHbfe2bbLkJsLKGHoxsYi_EQIEp5OlaSMMrKYuhMI2VbDL2aLpyTIUKplTSgDzPGic9rKL4KU-dGdwI9coL4ZoZ2eBHFgdoUw-IJB7KdF5tBvy8HGSln8pXBGcCKIFZf31hVMxFsHrLSdFeSJL2VFIpGyIloVMjN6Mdz_B2gw4ylfCcO_YYtJQfcTelpY8fioDp3MCLglQHuyaX9tOYTR5xHkfJF6koGKa3Euhlp8by5cas9gB_1-q"/>
+</div>
+<div class="h-8 w-8 rounded-full border-2 border-white overflow-hidden bg-slate-100">
+<img alt="Avatar" data-alt="professional woman in corporate attire looking confidently at camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5NoHIGEmU1hDI_jJ-cHnFH74M1DzU7YsFa74q_kVawhY_OIceR4SAWqP2qm3ABhXCPd0CxbOI8Nguj_py4rjTjUIOt438BJWbEpTdKBkAUKfaGO4RpS6mn1m2MJVgXGaUC_lEKmyQY3lHGenhw_x5fZIeYQB0bBD7fLMsT-DVU3sMjnQNeKRAXE8drd0l21vC9VIzbWwcU4EqQweH1VLWeI_69AveD-b2v-vBoohODxRi8lGWFBvy_6LIDSbEZo6TBDqTzzweyFEX"/>
+</div>
+<div class="h-8 w-8 rounded-full border-2 border-white bg-secondary-container flex items-center justify-center text-[10px] font-bold text-primary">
+                            +15
+                        </div>
+</div>
+</div>
+<div class="bg-primary text-white rounded-xl p-6 flex flex-col justify-between shadow-lg shadow-primary/20">
+<p class="text-primary-fixed text-sm font-medium mb-1">Invite New</p>
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-4xl" data-icon="person_add">person_add</span>
+<button class="bg-white/20 hover:bg-white/30 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Team Directory (Tonal Layering & Asymmetric Layout) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_24px_48px_-12px_rgba(0,0,0,0.05)] overflow-hidden">
+<div class="px-8 py-6 border-b border-slate-50 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<h4 class="font-headline text-xl font-bold text-on-surface">Staff Directory</h4>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container text-secondary text-sm font-semibold rounded-lg hover:bg-surface-container-high transition-colors">
+                            Filter
+                        </button>
+<button class="px-4 py-2 bg-surface-container text-secondary text-sm font-semibold rounded-lg hover:bg-surface-container-high transition-colors">
+                            Export CSV
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-8 py-4 font-label text-xs font-bold uppercase tracking-wider text-slate-500">Member</th>
+<th class="px-8 py-4 font-label text-xs font-bold uppercase tracking-wider text-slate-500">Role</th>
+<th class="px-8 py-4 font-label text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
+<th class="px-8 py-4 font-label text-xs font-bold uppercase tracking-wider text-slate-500">Last Activity</th>
+<th class="px-8 py-4 font-label text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-50">
+<!-- Sarah Mitchell -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full overflow-hidden">
+<img alt="Sarah Mitchell" class="w-full h-full object-cover" data-alt="close-up portrait of professional woman with warm smile in bright office space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-f7cH5gzyoolKQOHNfYABNkKmgMNrvMHMmUE3mLCcjg1ceu0PRHe4MEaqUR1NVhfNB7A0ZmnPQCatWHarxhJ7-V79_M0VJILAje1Eig4EksioP6a2VqUkJNBnLGxP6OflJOQtgipbxZXnYSNbu1ea7BPMaBaadkr9ZBof9SwEpWC8JircwtvWwKl_hrRrDB7Frn2uyGK8t8khw6kXMaTYl1e5G6g6EvQ8hD5EmPqGEDEZwls6YNX1kNfb2RX9s4Z5jTy6TU_lB0GK"/>
+</div>
+<div>
+<p class="font-body text-sm font-bold text-on-surface">Sarah Mitchell</p>
+<p class="text-xs text-slate-500">sarah.m@precisionledger.com</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider rounded-full">Admin</span>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-[#1a6886]"></span>
+<span class="text-sm text-on-surface-variant font-medium">Active</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm text-slate-500 font-medium">2 mins ago</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- David Chen -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full overflow-hidden">
+<img alt="David Chen" class="w-full h-full object-cover" data-alt="portrait of professional man with thoughtful expression in minimal studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-eP8zJPzcQlWxV0bYEBHVPoL2zaly278gPUexgzN5LXGvoUvdNNz3U462-s-B3wAtY1mdkh2kd2pO-y5aKL7O2pQjNkG7SftGJTbLgmM0-w3vlyxiole-zs_xfDKyiIR9-yT8T5Jh_JQq8zQrZIMGldjJCpI-zKkqwssv24DmMPuhG-R4yyQTX0AzAuaEtMbyiZA6IOmRO8-C-Ra8nZxdOMK4xCdEntWgCyujs7tN5rkdF5dScwk9Od0n4Owzx2MH9UvuzF3DA3Ye"/>
+</div>
+<div>
+<p class="font-body text-sm font-bold text-on-surface">David Chen</p>
+<p class="text-xs text-slate-500">d.chen@precisionledger.com</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold uppercase tracking-wider rounded-full">Manager</span>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-[#1a6886]"></span>
+<span class="text-sm text-on-surface-variant font-medium">Active</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm text-slate-500 font-medium">14 mins ago</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Elena Rodriguez -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full overflow-hidden">
+<img alt="Elena Rodriguez" class="w-full h-full object-cover" data-alt="portrait of a woman in modern office setting with blurred greenery in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdmyXyCttj8oy0ziEopYgOZxvqmJ1xMxSmv42eo936EQCBr3vx9g0HQ-0QhAVm28wRm1-sM6TQ0ZlYFKB-xacpnuc0GuuX7qSCu5nPv5h3-QbYeyTozMFnRI7B1KWS9JVc_0jE2a_I0xzev4bzSZADN6i6KkIARQzcK-c-hF3O76FLTmL5RDP4uEMzB_p08fllVQgicffzKJ3W3imdzUsZIV2qKjJ0GcSL1Ux66W5wT3FdLhN0iGlPkRk26zUWdWRQcdyS40XD8gZZ"/>
+</div>
+<div>
+<p class="font-body text-sm font-bold text-on-surface">Elena Rodriguez</p>
+<p class="text-xs text-slate-500">e.rodriguez@precisionledger.com</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-surface-container-highest text-secondary text-[10px] font-bold uppercase tracking-wider rounded-full">Clerk</span>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-slate-300"></span>
+<span class="text-sm text-slate-400 font-medium">Offline</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm text-slate-500 font-medium">2 hours ago</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Marcus Thorne -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full overflow-hidden">
+<img alt="Marcus Thorne" class="w-full h-full object-cover" data-alt="headshot of man with glasses in casual professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaaXAPugYotQDe10ZV3ZDm1EhwHh8mqxviHmWaiWZZRCSa7VElXkISQppaYSXhYW-_GJIw5s2rgQ1ENofLWpXe_0Jewxk63cC7c4p7NJJAzA0gbybaBr3xnkRojTNr04E1Z6ag-btm96KRXSGDoExwWr0da8j9czwyxpazhFmiRgbITZyPqqqBlTLXvJuYjC49O3qsQd9egOkNvk6-oYu_1NQ7cKXlvM-Q9u05Au5S99yOfxTwTYd8SFPu8myiLpO33z6McOXbeIYp"/>
+</div>
+<div>
+<p class="font-body text-sm font-bold text-on-surface">Marcus Thorne</p>
+<p class="text-xs text-slate-500">m.thorne@precisionledger.com</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-surface-container-highest text-secondary text-[10px] font-bold uppercase tracking-wider rounded-full">Clerk</span>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-[#1a6886]"></span>
+<span class="text-sm text-on-surface-variant font-medium">Active</span>
+</div>
+</td>
+<td class="px-8 py-5 text-sm text-slate-500 font-medium">Just now</td>
+<td class="px-8 py-5 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-8 py-4 bg-surface-container-low/20 flex justify-between items-center">
+<p class="text-xs text-slate-500 font-medium tracking-wide">Showing 1-4 of 24 members</p>
+<div class="flex gap-4">
+<button class="text-slate-400 hover:text-primary disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Role Distribution Area (Asymmetric Layout) -->
+<div class="mt-12 flex flex-col lg:flex-row gap-8">
+<div class="lg:w-1/3 bg-surface-container-low rounded-xl p-8">
+<h5 class="font-headline text-lg font-bold text-primary mb-6">Access Control</h5>
+<div class="space-y-6">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="h-2 w-2 rounded-full bg-primary"></div>
+<p class="text-sm font-body font-bold">Administrator</p>
+</div>
+<p class="text-sm font-bold text-primary">3 members</p>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="h-2 w-2 rounded-full bg-[#38bdf8]"></div>
+<p class="text-sm font-body font-bold">Managers</p>
+</div>
+<p class="text-sm font-bold text-primary">6 members</p>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="h-2 w-2 rounded-full bg-slate-300"></div>
+<p class="text-sm font-body font-bold">Clerks</p>
+</div>
+<p class="text-sm font-bold text-primary">15 members</p>
+</div>
+</div>
+<button class="mt-8 w-full py-2 bg-transparent border border-outline-variant/30 text-secondary text-sm font-bold rounded-lg hover:bg-white/50 transition-colors">
+                        Review Permissions
+                    </button>
+</div>
+<div class="lg:w-2/3 bg-surface-container-highest/30 rounded-xl p-8 border border-white/50 backdrop-blur-sm relative overflow-hidden">
+<div class="relative z-10">
+<h5 class="font-headline text-lg font-bold text-primary mb-2">Audit Log Summary</h5>
+<p class="text-secondary text-sm mb-8">Recent critical administrative actions</p>
+<div class="space-y-6">
+<div class="flex gap-4">
+<div class="h-8 w-8 rounded-lg bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="security">security</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Sarah Mitchell changed Elena's role</p>
+<p class="text-xs text-slate-500">Today, 9:41 AM</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="h-8 w-8 rounded-lg bg-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="person_add">person_add</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">New member invited: Marcus Thorne</p>
+<p class="text-xs text-slate-500">Yesterday, 4:20 PM</p>
+</div>
+</div>
+</div>
+<a class="mt-8 inline-block text-primary text-xs font-bold uppercase tracking-widest hover:translate-x-1 transition-transform" href="#">
+                            View All Logs →
+                        </a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
