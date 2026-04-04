@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Reports - The Precision Ledger</title>
+<title>Logictisc Web - Reports</title>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -109,7 +109,7 @@
 <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
 </div>
 <div>
-<h1 class="font-bold text-lg text-cyan-900 dark:text-cyan-50 font-headline">The Precision Ledger</h1>
+<h1 class="font-bold text-lg text-cyan-900 dark:text-cyan-50 font-headline">Logictisc Web</h1>
 <p class="text-[10px] uppercase tracking-widest text-secondary">Inventory Management</p>
 </div>
 </div>
@@ -150,6 +150,14 @@
 <a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
 <span class="material-symbols-outlined">group</span>
 <span class="font-manrope text-sm font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockin.html">
+<span class="material-symbols-outlined">download</span>
+<span class="font-manrope text-sm font-medium">DashBoard StockIn</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockout.html">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-manrope text-sm font-medium">DashBoard StockOut</span>
 </a>
 <a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
 <span class="material-symbols-outlined">settings</span>
@@ -284,6 +292,14 @@
                     borderColor: '#536167',
                     borderDash: [5, 5],
                     tension: 0.4
+                },
+                {
+                    label: 'Inventory Level',
+                    data: [5400, 6100, 5600, 6110], // Nhập - Xuất - Tồn mapping Example
+                    borderColor: '#176684',
+                    borderDash: [2, 2],
+                    tension: 0.4,
+                    fill: false
                 }
             ]
         },
