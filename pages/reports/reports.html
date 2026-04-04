@@ -168,8 +168,8 @@
 <div class="flex items-center gap-3">
 <img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDpmTUEsQvrwvZ1fT-xyiREzaBOPFbj2OFCtNkczz1uqHHOd4QbdjcM0CjpuqW3w-gmqByd3oGY_raSVCbq04sIOaDblVfZ48Cw2jXy4a_oCCbEFjR5Jckm5D5kVDbvAyL-vSAqcW1Kt3iHfB6Vg8datWPqdi8zquoqOGfCeOyUDjeqz60y4Oicz5t0MrtE5vaSz17cc1txmRZSijFvkN4tLAkddUWSKKX6OeUyVI9h2YQvevTfL-sPraPX6TfyT_-aVgrTt18pXfo"/>
 <div class="flex-1 min-w-0">
-<p class="text-xs font-bold truncate">Alex Sterling</p>
-<p class="text-[10px] text-secondary truncate">Inventory Manager</p>
+<p class="text-xs font-bold truncate" data-user-name>Alex Sterling</p>
+<p class="text-[10px] text-secondary truncate" data-user-role>Inventory Manager</p>
 </div>
 </div>
 </div>
@@ -212,11 +212,11 @@
                 <p class="text-secondary mt-1">Movement and valuation metrics.</p>
             </div>
             <div class="flex gap-3">
-                <button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-highest text-primary font-semibold rounded-lg hover:bg-surface-container-high transition-colors active:scale-95">
+                <button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-highest text-primary font-semibold rounded-lg hover:bg-surface-container-high transition-colors active:scale-95" id="reports-export-pdf">
                     <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
                     <span>Export PDF</span>
                 </button>
-                <button class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-b from-green-600 to-green-700 text-white font-semibold rounded-lg shadow-lg shadow-green-600/20 transition-transform active:scale-95">
+                <button class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-b from-green-600 to-green-700 text-white font-semibold rounded-lg shadow-lg shadow-green-600/20 transition-transform active:scale-95" id="reports-export-excel">
                     <span class="material-symbols-outlined text-sm">table_view</span>
                     <span>Export Excel</span>
                 </button>
@@ -230,24 +230,24 @@
                 <div class="mt-2 flex gap-4">
                     <div>
                         <p class="text-[10px] text-green-600 font-bold mb-1 uppercase">Inbound</p>
-                        <h3 class="text-xl font-extrabold font-headline text-on-surface">5,420 <span class="text-xs text-secondary font-medium">units</span></h3>
+                        <h3 class="text-xl font-extrabold font-headline text-on-surface"><span id="reports-inbound-qty">--</span> <span class="text-xs text-secondary font-medium">units</span></h3>
                     </div>
                     <div class="w-px bg-slate-100"></div>
                     <div>
                         <p class="text-[10px] text-orange-600 font-bold mb-1 uppercase">Outbound</p>
-                        <h3 class="text-xl font-extrabold font-headline text-on-surface">3,110 <span class="text-xs text-secondary font-medium">units</span></h3>
+                        <h3 class="text-xl font-extrabold font-headline text-on-surface"><span id="reports-outbound-qty">--</span> <span class="text-xs text-secondary font-medium">units</span></h3>
                     </div>
                 </div>
             </div>
             <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100">
                 <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Top Performing Category</p>
-                <h3 class="text-2xl font-extrabold font-headline text-primary mt-2">Bearings</h3>
-                <p class="text-sm text-secondary mt-1">45% of total outbound volume.</p>
+                <h3 class="text-2xl font-extrabold font-headline text-primary mt-2" id="reports-top-category">--</h3>
+                <p class="text-sm text-secondary mt-1" id="reports-top-category-caption">Loading category performance.</p>
             </div>
             <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100">
-                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Inventory Turnover Rate</p>
-                <h3 class="text-3xl font-extrabold font-headline text-primary mt-2">4.2</h3>
-                <p class="text-xs text-primary-fixed-dim mt-1 font-medium">Higher than industry average (3.8)</p>
+                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Stock On Hand</p>
+                <h3 class="text-3xl font-extrabold font-headline text-primary mt-2" id="reports-on-hand">--</h3>
+                <p class="text-xs text-primary-fixed-dim mt-1 font-medium" id="reports-on-hand-caption">Loading stock availability.</p>
             </div>
         </div>
 
@@ -321,5 +321,8 @@
     });
 </script>
 
+<script src="../../scripts/services/api.js"></script>
+<script src="../../scripts/services/shell.js"></script>
+<script src="../../scripts/pages/reportsPage.js"></script>
 </body>
 </html>

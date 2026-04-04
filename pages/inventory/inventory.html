@@ -165,8 +165,8 @@
 <div class="flex items-center gap-3">
 <img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDpmTUEsQvrwvZ1fT-xyiREzaBOPFbj2OFCtNkczz1uqHHOd4QbdjcM0CjpuqW3w-gmqByd3oGY_raSVCbq04sIOaDblVfZ48Cw2jXy4a_oCCbEFjR5Jckm5D5kVDbvAyL-vSAqcW1Kt3iHfB6Vg8datWPqdi8zquoqOGfCeOyUDjeqz60y4Oicz5t0MrtE5vaSz17cc1txmRZSijFvkN4tLAkddUWSKKX6OeUyVI9h2YQvevTfL-sPraPX6TfyT_-aVgrTt18pXfo"/>
 <div class="flex-1 min-w-0">
-<p class="text-xs font-bold truncate">Alex Sterling</p>
-<p class="text-[10px] text-secondary truncate">Inventory Manager</p>
+<p class="text-xs font-bold truncate" data-user-name>Alex Sterling</p>
+<p class="text-[10px] text-secondary truncate" data-user-role>Inventory Manager</p>
 </div>
 </div>
 </div>
@@ -179,7 +179,7 @@
         <div class="flex items-center gap-8 flex-1">
             <div class="relative w-96">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
-                <input class="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search inventory, SKUs, or suppliers..." type="text"/>
+                <input class="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all" id="inventory-search-input" placeholder="Search inventory, SKUs, or suppliers..." type="text"/>
             </div>
         </div>
         <div class="flex items-center gap-4">
@@ -205,6 +205,10 @@
                 <p class="text-secondary mt-1">Real-time asset tracking and physical counts.</p>
             </div>
             <div class="flex gap-3">
+                <button onclick="document.getElementById('product-modal').classList.remove('hidden')" class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-highest text-primary font-semibold rounded-lg hover:bg-surface-container-high transition-colors active:scale-95">
+                    <span class="material-symbols-outlined text-sm">add_box</span>
+                    <span>Add Product</span>
+                </button>
                 <button onclick="document.getElementById('stocktake-modal').classList.remove('hidden')" class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-b from-primary to-primary-container text-white font-semibold rounded-lg shadow-lg shadow-primary/10 transition-transform active:scale-95">
                     <span class="material-symbols-outlined text-sm">fact_check</span>
                     <span>Start Stocktaking</span>
@@ -217,21 +221,21 @@
             <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100 relative overflow-hidden group">
                 <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Total SKUs</p>
                 <div class="flex items-center justify-between mt-2">
-                    <h3 class="text-3xl font-extrabold font-headline text-primary mt-1">1,402</h3>
+                    <h3 class="text-3xl font-extrabold font-headline text-primary mt-1" id="inventory-total-skus">--</h3>
                     <div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-primary"><span class="material-symbols-outlined">category</span></div>
                 </div>
             </div>
             <div class="bg-surface-container-lowest p-6 rounded-xl border border-error-container relative overflow-hidden group">
                 <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Low Stock Items</p>
                 <div class="flex items-center justify-between mt-2">
-                    <h3 class="text-3xl font-extrabold font-headline text-error mt-1">12</h3>
+                    <h3 class="text-3xl font-extrabold font-headline text-error mt-1" id="inventory-low-stock">--</h3>
                     <div class="w-10 h-10 rounded-lg bg-error-container flex items-center justify-center text-on-error-container"><span class="material-symbols-outlined">warning</span></div>
                 </div>
             </div>
             <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100 relative overflow-hidden group">
                 <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Pending Adjustments</p>
                 <div class="flex items-center justify-between mt-2">
-                    <h3 class="text-3xl font-extrabold font-headline text-primary mt-1">3</h3>
+                    <h3 class="text-3xl font-extrabold font-headline text-primary mt-1" id="inventory-pending-checks">--</h3>
                     <div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-secondary"><span class="material-symbols-outlined">rule_settings</span></div>
                 </div>
             </div>
@@ -242,10 +246,8 @@
             <div class="p-4 border-b border-slate-50 flex items-center justify-between bg-surface-container-low/30">
                 <h4 class="text-lg font-bold font-headline">Current Stock Levels</h4>
                 <div class="flex gap-2 text-sm">
-                    <select class="bg-white border-none rounded-md px-3 py-1.5 shadow-sm text-secondary focus:ring-0 cursor-pointer">
-                        <option>All Categories</option>
-                        <option>Bearings</option>
-                        <option>Fluids</option>
+                    <select class="bg-white border-none rounded-md px-3 py-1.5 shadow-sm text-secondary focus:ring-0 cursor-pointer" id="inventory-category-filter">
+                        <option value="">All Categories</option>
                     </select>
                     <select class="bg-white border-none rounded-md px-3 py-1.5 shadow-sm text-secondary focus:ring-0 cursor-pointer">
                         <option>All Zones</option>
@@ -267,7 +269,7 @@
                             <th class="p-4"></th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-50 text-sm">
+                    <tbody class="divide-y divide-slate-50 text-sm" id="inventory-table-body">
                         <tr class="hover:bg-slate-50 transition-colors">
                             <td class="p-4">
                                 <p class="font-bold text-on-surface">Precision Bearings X-200</p>
@@ -321,7 +323,7 @@
             </div>
             
             <div class="px-6 py-4 border-t border-slate-50 flex items-center justify-between text-sm text-secondary">
-                <span>Showing 1 to 3 of 1,402 entries</span>
+                <span id="inventory-table-summary">Loading inventory data...</span>
                 <div class="flex gap-1">
                     <button class="px-3 py-1 rounded bg-surface hover:bg-slate-200 transition">Prev</button>
                     <button class="px-3 py-1 rounded bg-primary text-white font-medium">1</button>
@@ -333,6 +335,68 @@
 
     </div>
 </main>
+
+<!-- Product Modal -->
+<div id="product-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
+    <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="document.getElementById('product-modal').classList.add('hidden')"></div>
+    <div class="bg-surface-container-lowest w-full max-w-2xl rounded-2xl shadow-2xl relative z-10 overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-surface">
+            <div>
+                <h3 class="text-xl font-bold font-headline text-primary">Add New Product</h3>
+                <p class="text-sm text-secondary mt-1">Create a product and initialize its stock at 0.</p>
+            </div>
+            <button onclick="document.getElementById('product-modal').classList.add('hidden')" class="text-secondary hover:text-error"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <form class="p-6 overflow-y-auto flex-1 space-y-5" id="product-form">
+            <div id="product-form-feedback" class="hidden rounded-lg px-4 py-3 text-sm font-medium"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2" for="product-sku">SKU</label>
+                    <input id="product-sku" name="sku" type="text" required class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary/30 transition-all outline-none" placeholder="VD: PBX-200-01"/>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2" for="product-name">Product Name</label>
+                    <input id="product-name" name="name" type="text" required class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary/30 transition-all outline-none" placeholder="Precision Bearings X-200"/>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2" for="product-category">Category</label>
+                    <select id="product-category" name="categoryId" required class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary/30 transition-all outline-none">
+                        <option value="">Choose category</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2" for="product-unit">Unit</label>
+                    <select id="product-unit" name="unitId" required class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary/30 transition-all outline-none">
+                        <option value="">Choose unit</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2" for="product-min-stock">Min Stock Level</label>
+                    <input id="product-min-stock" name="minStockLevel" type="number" min="0" step="1" value="0" class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary/30 transition-all outline-none"/>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2" for="product-status">Status</label>
+                    <select id="product-status" name="status" class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary/30 transition-all outline-none">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2" for="product-description">Description</label>
+                <textarea id="product-description" name="description" rows="3" class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary/30 transition-all outline-none" placeholder="Optional product description"></textarea>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2" for="product-image-url">Image URL</label>
+                <input id="product-image-url" name="imageUrl" type="url" class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary/30 transition-all outline-none" placeholder="https://example.com/product-image.png"/>
+            </div>
+        </form>
+        <div class="p-6 border-t border-slate-100 bg-surface flex justify-end gap-3">
+            <button onclick="document.getElementById('product-modal').classList.add('hidden')" class="px-5 py-2.5 rounded-lg text-secondary font-semibold hover:bg-slate-200 transition-colors" type="button">Cancel</button>
+            <button class="px-5 py-2.5 bg-primary text-white font-semibold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary-container transition-colors disabled:opacity-60" form="product-form" id="product-submit-button" type="submit">Save Product</button>
+        </div>
+    </div>
+</div>
 
 <!-- Stocktaking Modal (Hidden by default) -->
 <div id="stocktake-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
@@ -353,11 +417,11 @@
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2">Auditor</label>
-                    <input type="text" disabled value="Alex Sterling" class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm text-slate-500"/>
+                    <input id="inventory-auditor-name" type="text" disabled value="Alex Sterling" class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm text-slate-500"/>
                 </div>
             </div>
             
-            <div class="border border-slate-100 rounded-xl overflow-hidden">
+            <div class="border border-slate-100 rounded-xl overflow-hidden" id="inventory-stocktake-items">
                 <div class="bg-surface px-4 py-2 border-b border-slate-100 text-xs font-bold text-secondary uppercase flex justify-between">
                     <span>Product</span>
                     <span>System Qty ➔ Actual</span>
@@ -478,5 +542,8 @@
     });
 </script>
 
+<script src="../../scripts/services/api.js"></script>
+<script src="../../scripts/services/shell.js"></script>
+<script src="../../scripts/pages/inventoryPage.js"></script>
 </body>
 </html>
