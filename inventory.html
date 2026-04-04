@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Logictisc Web - Inventory</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary": "#536167",
+              "tertiary-fixed-dim": "#ffb873",
+              "surface-tint": "#176684",
+              "surface-dim": "#d8dadb",
+              "on-tertiary-fixed": "#2d1600",
+              "on-secondary-fixed-variant": "#3b494f",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f2f4f5",
+              "on-tertiary": "#ffffff",
+              "on-background": "#191c1d",
+              "on-secondary-fixed": "#101d23",
+              "tertiary-fixed": "#ffdcbf",
+              "on-error": "#ffffff",
+              "surface-variant": "#e1e3e4",
+              "tertiary": "#6d3d00",
+              "outline": "#707880",
+              "on-surface": "#191c1d",
+              "primary": "#004f69",
+              "surface-container-highest": "#e1e3e4",
+              "secondary-container": "#d6e5ec",
+              "on-tertiary-fixed-variant": "#6a3b00",
+              "on-secondary": "#ffffff",
+              "primary-container": "#1a6886",
+              "inverse-on-surface": "#eff1f2",
+              "surface-container-lowest": "#ffffff",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#8dcff2",
+              "error-container": "#ffdad6",
+              "on-tertiary-container": "#ffd5b0",
+              "on-secondary-container": "#58676d",
+              "secondary-fixed-dim": "#bac9d0",
+              "secondary-fixed": "#d6e5ec",
+              "primary-fixed-dim": "#8dcff2",
+              "outline-variant": "#c0c7d0",
+              "background": "#f8fafb",
+              "surface": "#f8fafb",
+              "tertiary-container": "#8f5201",
+              "on-primary-fixed-variant": "#004d66",
+              "on-primary-fixed": "#001e2b",
+              "surface-container": "#eceeef",
+              "on-surface-variant": "#40484f",
+              "surface-container-high": "#e6e8e9",
+              "surface-bright": "#f8fafb",
+              "error": "#ba1a1a",
+              "inverse-surface": "#2e3132",
+              "primary-fixed": "#c1e8ff",
+              "on-primary-container": "#b1e3ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        background-color: rgba(225, 227, 228, 0.8);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #c0c7d0;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed">
+
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-200/50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-950 flex flex-col h-full py-4 gap-1 z-50 overflow-y-auto custom-scrollbar">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</div>
+<div>
+<h1 class="font-bold text-lg text-cyan-900 dark:text-cyan-50 font-headline">Logictisc Web</h1>
+<p class="text-[10px] uppercase tracking-widest text-secondary">Inventory Management</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-manrope text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-manrope text-sm font-medium">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">storage</span>
+<span class="font-manrope text-sm font-medium">Storage</span>
+</a>
+<!-- Active: Inventory -->
+<a class="flex items-center gap-3 px-4 py-3 bg-cyan-100/50 dark:bg-cyan-900/30 text-cyan-900 dark:text-cyan-100 rounded-lg mx-2 transition-all scale-[0.98] active:scale-95 duration-150" href="inventory.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory</span>
+<span class="font-manrope text-sm font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-manrope text-sm font-medium">Suppliers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">input</span>
+<span class="font-manrope text-sm font-medium">Stock In</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">output</span>
+<span class="font-manrope text-sm font-medium">Stock Out</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="reports.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-manrope text-sm font-medium">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-manrope text-sm font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockin.html">
+<span class="material-symbols-outlined">download</span>
+<span class="font-manrope text-sm font-medium">DashBoard StockIn</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockout.html">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-manrope text-sm font-medium">DashBoard StockOut</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-manrope text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 py-4 mx-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm">
+<div class="flex items-center gap-3">
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDpmTUEsQvrwvZ1fT-xyiREzaBOPFbj2OFCtNkczz1uqHHOd4QbdjcM0CjpuqW3w-gmqByd3oGY_raSVCbq04sIOaDblVfZ48Cw2jXy4a_oCCbEFjR5Jckm5D5kVDbvAyL-vSAqcW1Kt3iHfB6Vg8datWPqdi8zquoqOGfCeOyUDjeqz60y4Oicz5t0MrtE5vaSz17cc1txmRZSijFvkN4tLAkddUWSKKX6OeUyVI9h2YQvevTfL-sPraPX6TfyT_-aVgrTt18pXfo"/>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">Alex Sterling</p>
+<p class="text-[10px] text-secondary truncate">Inventory Manager</p>
+</div>
+</div>
+</div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="ml-64 flex flex-col min-h-screen">
+    <!-- TopAppBar -->
+    <header class="sticky top-0 z-40 w-full border-b border-slate-200/50 dark:border-slate-800/50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none flex items-center justify-between px-8 h-16 w-full">
+        <div class="flex items-center gap-8 flex-1">
+            <div class="relative w-96">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+                <input class="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search inventory, SKUs, or suppliers..." type="text"/>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+                <span class="material-symbols-outlined">help</span>
+            </button>
+            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+                <span class="material-symbols-outlined">account_circle</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="p-8 space-y-8 max-w-7xl mx-auto w-full relative">
+        
+        <!-- Header -->
+        <div class="flex items-end justify-between">
+            <div>
+                <h2 class="text-3xl font-extrabold font-headline tracking-tight text-primary">Inventory &amp; Stocktaking</h2>
+                <p class="text-secondary mt-1">Real-time asset tracking and physical counts.</p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="document.getElementById('stocktake-modal').classList.remove('hidden')" class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-b from-primary to-primary-container text-white font-semibold rounded-lg shadow-lg shadow-primary/10 transition-transform active:scale-95">
+                    <span class="material-symbols-outlined text-sm">fact_check</span>
+                    <span>Start Stocktaking</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100 relative overflow-hidden group">
+                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Total SKUs</p>
+                <div class="flex items-center justify-between mt-2">
+                    <h3 class="text-3xl font-extrabold font-headline text-primary mt-1">1,402</h3>
+                    <div class="w-10 h-10 rounded-lg bg-surface flex items-center justify-center text-primary"><span class="material-symbols-outlined">category</span></div>
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-error-container relative overflow-hidden group">
+                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Low Stock Items</p>
+                <div class="flex items-center justify-between mt-2">
+                    <h3 class="text-3xl font-extrabold font-headline text-error mt-1">12</h3>
+                    <div class="w-10 h-10 rounded-lg bg-error-container flex items-center justify-center text-on-error-container"><span class="material-symbols-outlined">warning</span></div>
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100 relative overflow-hidden group">
+                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Pending Adjustments</p>
+                <div class="flex items-center justify-between mt-2">
+                    <h3 class="text-3xl font-extrabold font-headline text-primary mt-1">3</h3>
+                    <div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-secondary"><span class="material-symbols-outlined">rule_settings</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+            <div class="p-4 border-b border-slate-50 flex items-center justify-between bg-surface-container-low/30">
+                <h4 class="text-lg font-bold font-headline">Current Stock Levels</h4>
+                <div class="flex gap-2 text-sm">
+                    <select class="bg-white border-none rounded-md px-3 py-1.5 shadow-sm text-secondary focus:ring-0 cursor-pointer">
+                        <option>All Categories</option>
+                        <option>Bearings</option>
+                        <option>Fluids</option>
+                    </select>
+                    <select class="bg-white border-none rounded-md px-3 py-1.5 shadow-sm text-secondary focus:ring-0 cursor-pointer">
+                        <option>All Zones</option>
+                        <option>Zone A</option>
+                        <option>Zone B</option>
+                    </select>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-surface text-secondary text-xs uppercase tracking-wider font-semibold border-b border-slate-100">
+                            <th class="p-4 font-medium">SKU / Product Name</th>
+                            <th class="p-4 font-medium">Category</th>
+                            <th class="p-4 font-medium">Location</th>
+                            <th class="p-4 font-medium text-right">In Stock</th>
+                            <th class="p-4 font-medium text-center">Status</th>
+                            <th class="p-4 font-medium">Last Updated</th>
+                            <th class="p-4"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-50 text-sm">
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="p-4">
+                                <p class="font-bold text-on-surface">Precision Bearings X-200</p>
+                                <p class="text-xs text-secondary mt-0.5">SKU: PBX-200-01</p>
+                            </td>
+                            <td class="p-4 text-secondary">Bearings</td>
+                            <td class="p-4 text-secondary">Zone B-12</td>
+                            <td class="p-4 text-right font-bold font-headline">850 <span class="text-xs font-normal text-slate-400">pcs</span></td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex py-1 px-3 rounded-full text-[10px] font-bold uppercase tracking-wide bg-primary-fixed-dim text-on-primary-fixed">OPTIMAL</span>
+                            </td>
+                            <td class="p-4 text-secondary">2 hours ago</td>
+                            <td class="p-4 text-right">
+                                <button class="text-primary hover:bg-surface p-2 rounded-lg transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition-colors bg-error/5">
+                            <td class="p-4">
+                                <p class="font-bold text-on-surface">Hydraulic Fluid H46</p>
+                                <p class="text-xs text-secondary mt-0.5">SKU: HYD-F-46</p>
+                            </td>
+                            <td class="p-4 text-secondary">Fluids</td>
+                            <td class="p-4 text-secondary">Zone A-01</td>
+                            <td class="p-4 text-right font-bold font-headline text-error">12 <span class="text-xs font-normal text-slate-400">Liters</span></td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex py-1 px-3 rounded-full text-[10px] font-bold uppercase tracking-wide bg-error-container text-on-error-container">LOW STOCK</span>
+                            </td>
+                            <td class="p-4 text-secondary">45 mins ago</td>
+                            <td class="p-4 text-right">
+                                <button class="text-primary hover:bg-surface p-2 rounded-lg transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="p-4">
+                                <p class="font-bold text-on-surface">Industrial Gearbox G-90</p>
+                                <p class="text-xs text-secondary mt-0.5">SKU: IGX-G90</p>
+                            </td>
+                            <td class="p-4 text-secondary">Machinery</td>
+                            <td class="p-4 text-secondary">Zone C-05</td>
+                            <td class="p-4 text-right font-bold font-headline">45 <span class="text-xs font-normal text-slate-400">Units</span></td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex py-1 px-3 rounded-full text-[10px] font-bold uppercase tracking-wide bg-primary-fixed-dim text-on-primary-fixed">OPTIMAL</span>
+                            </td>
+                            <td class="p-4 text-secondary">1 day ago</td>
+                            <td class="p-4 text-right">
+                                <button class="text-primary hover:bg-surface p-2 rounded-lg transition-colors"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="px-6 py-4 border-t border-slate-50 flex items-center justify-between text-sm text-secondary">
+                <span>Showing 1 to 3 of 1,402 entries</span>
+                <div class="flex gap-1">
+                    <button class="px-3 py-1 rounded bg-surface hover:bg-slate-200 transition">Prev</button>
+                    <button class="px-3 py-1 rounded bg-primary text-white font-medium">1</button>
+                    <button class="px-3 py-1 rounded bg-surface hover:bg-slate-200 transition">2</button>
+                    <button class="px-3 py-1 rounded bg-surface hover:bg-slate-200 transition">Next</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<!-- Stocktaking Modal (Hidden by default) -->
+<div id="stocktake-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
+    <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="document.getElementById('stocktake-modal').classList.add('hidden')"></div>
+    <div class="bg-surface-container-lowest w-full max-w-2xl rounded-2xl shadow-2xl relative z-10 overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-surface">
+            <h3 class="text-xl font-bold font-headline text-primary">New Stocktaking Session</h3>
+            <button onclick="document.getElementById('stocktake-modal').classList.add('hidden')" class="text-secondary hover:text-error"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="p-6 overflow-y-auto flex-1 space-y-6">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2">Zone / Category to Audit</label>
+                    <select class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm focus:ring-2 focus:ring-primary/30 transition-all outline-none">
+                        <option>All Zones</option>
+                        <option>Zone A</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2">Auditor</label>
+                    <input type="text" disabled value="Alex Sterling" class="w-full bg-surface-container-low border-none rounded-lg p-3 text-sm text-slate-500"/>
+                </div>
+            </div>
+            
+            <div class="border border-slate-100 rounded-xl overflow-hidden">
+                <div class="bg-surface px-4 py-2 border-b border-slate-100 text-xs font-bold text-secondary uppercase flex justify-between">
+                    <span>Product</span>
+                    <span>System Qty ➔ Actual</span>
+                </div>
+                <!-- Audit Row 1 -->
+                <div class="p-4 border-b border-slate-50 flex items-center justify-between">
+                    <div>
+                        <p class="font-bold text-sm">Industrial Gearbox G-90</p>
+                        <p class="text-xs text-secondary">SKU: IGX-G90</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-secondary font-medium">45</span>
+                        <span class="material-symbols-outlined text-sm text-slate-300">arrow_forward</span>
+                        <input type="number" value="45" class="w-20 bg-surface-container-low border-none rounded-lg p-2 text-center text-sm font-bold focus:ring-2 focus:ring-primary/30 transition-all outline-none"/>
+                    </div>
+                </div>
+                <!-- Audit Row 2 -->
+                <div class="p-4 flex items-center justify-between">
+                    <div>
+                        <p class="font-bold text-sm">Hydraulic Fluid H46</p>
+                        <p class="text-xs text-secondary">SKU: HYD-F-46</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-secondary font-medium">12</span>
+                        <span class="material-symbols-outlined text-sm text-slate-300">arrow_forward</span>
+                        <input type="number" value="10" class="w-20 bg-error/10 text-error border-none rounded-lg p-2 text-center text-sm font-bold focus:ring-2 focus:ring-error/30 transition-all outline-none"/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-error-container/30 text-error p-3 rounded-lg flex items-center gap-2 text-sm font-medium">
+                <span class="material-symbols-outlined text-base">info</span>
+                Found a discrepancy of -2 units for Hydraulic Fluid H46.
+            </div>
+
+        </div>
+        <div class="p-6 border-t border-slate-100 bg-surface flex justify-end gap-3">
+            <button onclick="document.getElementById('stocktake-modal').classList.add('hidden')" class="px-5 py-2.5 rounded-lg text-secondary font-semibold hover:bg-slate-200 transition-colors">Cancel</button>
+            <button onclick="submitStocktake()" class="px-5 py-2.5 bg-primary text-white font-semibold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary-container transition-colors">Submit Adjustments</button>
+        </div>
+    </div>
+</div>
+
+<!-- Example API Integration Script for Backend/Frontend Connection -->
+<script>
+    // Configuration object based on warehouse_rules_database_api.md
+    const API_BASE_URL = 'http://localhost:3000/api/v1';
+    
+    // Example 1: Fetching Inventory Data (Tồn kho)
+    // Matches: GET /api/v1/stocks
+    async function loadInventoryData() {
+        try {
+            console.log("Fetching inventory data from:", `${API_BASE_URL}/stocks`);
+            /* 
+               // UNCOMMENT TO USE ACTUAL API:
+               const response = await fetch(`${API_BASE_URL}/stocks`, {
+                   method: 'GET',
+                   headers: {
+                       'Authorization': 'Bearer YOUR_JWT_TOKEN',
+                       'Content-Type': 'application/json'
+                   }
+               });
+               const result = await response.json();
+               if(result.success) {
+                   // renderTable(result.data);
+               }
+            */
+        } catch (error) {
+            console.error("Failed to fetch inventory:", error);
+        }
+    }
+
+    // Example 2: Submitting a Stocktake (Kiểm kê)
+    // Matches: POST /api/v1/stock-checks
+    async function submitStocktake() {
+        // Collect data from the modal
+        const payload = {
+            check_date: new Date().toISOString().split('T')[0],
+            note: "Monthly audit for Zone A",
+            items: [
+                { product_id: 1, system_qty: 12, actual_qty: 10 }, // Example discrepancy
+                { product_id: 2, system_qty: 45, actual_qty: 45 }
+            ]
+        };
+
+        try {
+            console.log("Submitting stocktake data to:", `${API_BASE_URL}/stock-checks`, payload);
+            /*
+               // UNCOMMENT TO USE ACTUAL API:
+               const response = await fetch(`${API_BASE_URL}/stock-checks`, {
+                   method: 'POST',
+                   headers: {
+                       'Authorization': 'Bearer YOUR_JWT_TOKEN',
+                       'Content-Type': 'application/json'
+                   },
+                   body: JSON.stringify(payload)
+               });
+               const result = await response.json();
+               if(result.success) {
+                   alert("Stocktake submitted successfully!");
+                   document.getElementById('stocktake-modal').classList.add('hidden');
+                   loadInventoryData(); // Refresh table
+               }
+            */
+            
+            // Mock success for UI demo
+            alert("This is a demo. Backend API call would process this payload:\n" + JSON.stringify(payload, null, 2));
+            document.getElementById('stocktake-modal').classList.add('hidden');
+            
+        } catch (error) {
+            console.error("Failed to submit stocktake:", error);
+        }
+    }
+
+    // Initialize fetching when page loads
+    document.addEventListener("DOMContentLoaded", () => {
+        loadInventoryData();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stock Out Operation | Precision Ledger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-container": "#b1e3ff",
+              "secondary-fixed-dim": "#bac9d0",
+              "surface-container-lowest": "#ffffff",
+              "surface": "#f8fafb",
+              "tertiary-fixed-dim": "#ffb873",
+              "tertiary-fixed": "#ffdcbf",
+              "outline": "#707880",
+              "inverse-primary": "#8dcff2",
+              "on-secondary-fixed": "#101d23",
+              "on-primary-fixed": "#001e2b",
+              "on-tertiary-fixed": "#2d1600",
+              "secondary": "#536167",
+              "surface-tint": "#176684",
+              "surface-variant": "#e1e3e4",
+              "on-primary": "#ffffff",
+              "secondary-fixed": "#d6e5ec",
+              "outline-variant": "#c0c7d0",
+              "on-error": "#ffffff",
+              "primary-fixed": "#c1e8ff",
+              "inverse-surface": "#2e3132",
+              "surface-bright": "#f8fafb",
+              "surface-container-low": "#f2f4f5",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#eff1f2",
+              "error-container": "#ffdad6",
+              "secondary-container": "#d6e5ec",
+              "surface-container": "#eceeef",
+              "primary": "#004f69",
+              "primary-container": "#1a6886",
+              "surface-container-highest": "#e1e3e4",
+              "on-secondary-fixed-variant": "#3b494f",
+              "tertiary": "#6d3d00",
+              "on-surface-variant": "#40484f",
+              "surface-container-high": "#e6e8e9",
+              "on-primary-fixed-variant": "#004d66",
+              "on-error-container": "#93000a",
+              "background": "#f8fafb",
+              "tertiary-container": "#8f5201",
+              "surface-dim": "#d8dadb",
+              "on-tertiary": "#ffffff",
+              "on-secondary-container": "#58676d",
+              "on-tertiary-fixed-variant": "#6a3b00",
+              "error": "#ba1a1a",
+              "on-surface": "#191c1d",
+              "on-tertiary-container": "#ffd5b0",
+              "primary-fixed-dim": "#8dcff2",
+              "on-background": "#191c1d"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body { font-family: 'Inter', sans-serif; }
+      h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+      .glass-effect { backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r-0 bg-slate-50 dark:bg-slate-900 flex flex-col p-4 gap-2 z-50">
+<div class="mb-8 px-2">
+<h1 class="text-xl font-bold tracking-tight text-[#004f69] dark:text-[#1a6886]">Precision Ledger</h1>
+<p class="text-xs text-slate-500 font-medium">Inventory Curator</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:text-[#004f69] dark:hover:text-[#d6e5ec] transition-colors font-manrope text-sm font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Categories -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:text-[#004f69] dark:hover:text-[#d6e5ec] transition-colors font-manrope text-sm font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="category">category</span>
+<span>Categories</span>
+</a>
+<!-- Storage -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:text-[#004f69] dark:hover:text-[#d6e5ec] transition-colors font-manrope text-sm font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Storage</span>
+</a>
+<!-- Products -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:text-[#004f69] dark:hover:text-[#d6e5ec] transition-colors font-manrope text-sm font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="inventory">inventory</span>
+<span>Products</span>
+</a>
+<!-- Suppliers -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:text-[#004f69] dark:hover:text-[#d6e5ec] transition-colors font-manrope text-sm font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="conveyor_belt">conveyor_belt</span>
+<span>Suppliers</span>
+</a>
+<!-- Stock In -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:text-[#004f69] dark:hover:text-[#d6e5ec] transition-colors font-manrope text-sm font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="input">input</span>
+<span>Stock In</span>
+</a>
+<!-- Stock Out (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 bg-[#d6e5ec] dark:bg-[#1a6886]/20 text-[#004f69] dark:text-[#d6e5ec] rounded-xl font-bold font-manrope text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="output" style="font-variation-settings: 'FILL' 1;">output</span>
+<span>Stock Out</span>
+</a>
+<!-- Reports -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:text-[#004f69] dark:hover:text-[#d6e5ec] transition-colors font-manrope text-sm font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span>Reports</span>
+</a>
+<!-- Users -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:text-[#004f69] dark:hover:text-[#d6e5ec] transition-colors font-manrope text-sm font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Users</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-600 dark:text-slate-400 hover:text-[#004f69] dark:hover:text-[#d6e5ec] transition-colors font-manrope text-sm font-medium hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4">
+<button class="w-full flex items-center justify-center gap-2 py-3 bg-primary text-on-primary rounded-xl font-bold shadow-lg shadow-primary/20 hover:scale-[0.98] active:scale-[0.95] transition-transform">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+<span>New Entry</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 min-h-screen">
+<!-- TopAppBar Component -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-white/80 dark:bg-slate-950/80 glass-effect border-b border-slate-100 dark:border-slate-800/50 flex items-center justify-between px-8">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl" data-icon="search">search</span>
+<input class="w-full pl-11 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search inventory, SKUs, or orders..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-slate-50 dark:hover:bg-slate-900 rounded-full p-2 transition-all text-slate-500">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-slate-50 dark:hover:bg-slate-900 rounded-full p-2 transition-all text-slate-500">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<div class="flex items-center gap-3 pl-2">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface">Alex Curator</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider">Administrator</p>
+</div>
+<img alt="Administrator Profile" class="h-9 w-9 rounded-full object-cover border-2 border-primary/10" data-alt="Close-up professional portrait of a male administrator in a modern office setting, soft corporate lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO1a49EYo50jXVfFpseQ9GAX3hzIZ_8ugAV27hL8sbVno7NN1cR6xKvhz530qD8R8s8pw_H5DWVXop6WxybwIfD_U1dTokBYquvA90fejEyFuxSAfWgmf01bMO-75EWN9Al3RrzWtTFdvnjZitdIIwBEa5f7Ju5JnTdR3T-3RjAmO-_XOheFZWVqRVgEn5q-kL5aY5rxLtFHtBTwhhGTYj4l5qUaDwkwcEN34cFMoQ0uNkcJiFjtll1fRmrYf1G8miDRjvG4D-yPjM"/>
+</div>
+</div>
+</header>
+<div class="pt-24 pb-12 px-8 max-w-7xl mx-auto space-y-8">
+<!-- Page Title Section -->
+<div class="flex flex-col gap-1">
+<span class="text-primary font-bold tracking-[0.2em] text-xs uppercase">Stock Out</span>
+<h2 class="text-4xl font-extrabold text-on-surface tracking-tight font-headline">Execute Outgoing Inventory</h2>
+</div>
+<!-- Bento Grid Layout for Stock Out Operation -->
+<div class="grid grid-cols-12 gap-6 items-start">
+<!-- SKU Identification & Parameters (Col-Span 7) -->
+<div class="col-span-12 lg:col-span-7 space-y-6">
+<!-- SKU Entry Card -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border-none space-y-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+<div>
+<label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-3">SKU Identification</label>
+<div class="flex gap-3">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary" data-icon="qr_code_scanner">qr_code_scanner</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-highest border-none rounded-lg text-lg font-mono font-bold focus:ring-2 focus:ring-primary/20 transition-all text-[#004f69]" type="text" value="PL-9928-TX"/>
+</div>
+<button class="px-8 bg-primary text-on-primary rounded-lg font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
+<span>Detect</span>
+<span class="material-symbols-outlined text-lg" data-icon="target">target</span>
+</button>
+</div>
+</div>
+<!-- Item Preview (Injected when detected) -->
+<div class="flex gap-6 p-6 bg-surface-container-low rounded-xl items-center animate-in fade-in slide-in-from-bottom-2 duration-500">
+<div class="w-32 h-32 bg-white rounded-lg overflow-hidden flex-shrink-0 shadow-sm">
+<img alt="Titanium Series Chronograph" class="w-full h-full object-cover" data-alt="High-end minimalist titanium chronograph watch with a black leather strap, clean product photography on white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClRLaDmNTHama1AQHPIQWkXjfDcI_glMlC3Dlyz6cBFNT1kznL3OJ7hMuLeFKz8lfRuZ2BmUVQgZTX2bfxXrcGy-dlHDsyuZkv7kWowaKEoiMXWtbr-qJBP75ZdfoECBAvAx3ywZwnwzHGb3Ua0bKkf5U04k8L5tTVxaWfFHolxrmwmpJGVbdMY54qj_Yxr_0DbbXm3DSIRczTRnAgP-_cnHP9qimqVxNKd6RcD09kS2V49Iw73wj97ysLoGYEvDZwS1He64bzXrwh"/>
+</div>
+<div class="flex-1 space-y-4">
+<div>
+<h3 class="text-xl font-bold text-on-surface font-headline leading-tight">Titanium Series Chronograph</h3>
+<p class="text-slate-500 text-sm font-mono">SKU: PL-9928-TX</p>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="space-y-0.5">
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-tighter">Available</p>
+<p class="text-lg font-bold text-primary">124 <span class="text-xs font-normal">units</span></p>
+</div>
+<div class="space-y-0.5">
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-tighter">Location</p>
+<p class="text-lg font-bold text-on-surface">B4-22</p>
+</div>
+<div class="space-y-0.5">
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-tighter">Unit Weight</p>
+<p class="text-lg font-bold text-on-surface">0.45 kg</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Operation Parameters Card -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border-none space-y-8 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+<div class="grid grid-cols-2 gap-8">
+<!-- Destination Type -->
+<div class="space-y-4">
+<label class="block text-xs font-bold text-slate-500 uppercase tracking-widest">Destination Type</label>
+<div class="flex p-1 bg-surface-container-low rounded-lg gap-1">
+<button class="flex-1 py-2 px-3 rounded-md text-xs font-bold bg-white shadow-sm text-primary transition-all">Customer Order</button>
+<button class="flex-1 py-2 px-3 rounded-md text-xs font-bold text-slate-500 hover:text-slate-700 transition-all">Internal Transfer</button>
+</div>
+</div>
+<!-- Quantity -->
+<div class="space-y-4">
+<label class="block text-xs font-bold text-slate-500 uppercase tracking-widest">Quantity to Stock Out</label>
+<div class="flex items-center justify-between bg-surface-container-low rounded-lg p-1">
+<button class="w-10 h-10 flex items-center justify-center rounded-md bg-white text-slate-600 shadow-sm hover:bg-slate-50 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="remove">remove</span>
+</button>
+<span class="text-xl font-bold text-on-surface font-headline">1</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-md bg-white text-slate-600 shadow-sm hover:bg-slate-50 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Notes -->
+<div class="space-y-3">
+<label class="block text-xs font-bold text-slate-500 uppercase tracking-widest">Operation Notes</label>
+<textarea class="w-full p-4 bg-surface-container-low border-none rounded-xl text-sm focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-slate-400" placeholder="Reference PO-9283 / Rush delivery requested by warehouse lead..." rows="3"></textarea>
+</div>
+</div>
+</div>
+<!-- Summary & Action Sidebar (Col-Span 5) -->
+<div class="col-span-12 lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+<!-- Checkout-style Summary -->
+<div class="bg-primary-container text-on-primary-container p-8 rounded-xl space-y-6 relative overflow-hidden">
+<!-- Decorative element -->
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="output">output</span>
+</div>
+<div class="relative z-10 space-y-6">
+<h3 class="text-xl font-bold font-headline">Confirmation Summary</h3>
+<div class="space-y-3 border-t border-white/10 pt-4">
+<div class="flex justify-between text-sm">
+<span class="opacity-70 font-medium">Processing Date</span>
+<span class="font-bold">Oct 24, 2023</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="opacity-70 font-medium">Handled By</span>
+<span class="font-bold">Alex Curator</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="opacity-70 font-medium">Priority</span>
+<span class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed"></span>
+<span class="font-bold">Standard</span>
+</span>
+</div>
+</div>
+<button class="w-full py-5 bg-white text-primary rounded-xl font-extrabold text-lg flex items-center justify-center gap-3 shadow-xl shadow-black/10 hover:scale-[1.02] active:scale-[0.98] transition-all">
+<span>Complete Stock Out</span>
+<span class="material-symbols-outlined text-2xl" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<p class="text-[10px] text-center opacity-60 font-medium tracking-wide">CONFIRMING THIS ACTION WILL PERMANENTLY UPDATE INVENTORY LEVELS</p>
+</div>
+</div>
+<!-- Quick Help/Validation Card -->
+<div class="bg-surface-container-highest/30 p-6 rounded-xl border-none flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg" data-icon="info">info</span>
+<div>
+<p class="text-sm font-bold text-on-surface">Warehouse Policy</p>
+<p class="text-xs text-slate-500 leading-relaxed mt-1">Items leaving the B4 zone require secondary verification if quantity exceeds 50 units.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Log Section -->
+<div class="pt-8 space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="text-2xl font-bold font-headline tracking-tight text-on-surface">Today's Stock Out Log</h3>
+<button class="text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-1 hover:underline">
+<span>View All Transactions</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_24px_rgba(0,0,0,0.02)] overflow-hidden">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Transaction ID</th>
+<th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Product Information</th>
+<th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Qty</th>
+<th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Destination</th>
+<th class="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800/50">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-5 text-xs font-mono font-bold text-slate-500">TRX-00928-TX</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-sm" data-icon="architecture">architecture</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Precision Laser Level X-1</p>
+<p class="text-[10px] text-slate-400 font-mono">SKU: LS-2023-B</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-bold text-on-surface">12</td>
+<td class="px-6 py-5 text-sm text-slate-600">Customer (Order #442)</td>
+<td class="px-6 py-5 text-right">
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]" data-icon="done">done</span>
+                                        Success
+                                    </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50/50 transition-colors">
+<td class="px-6 py-5 text-xs font-mono font-bold text-slate-500">TRX-00927-TX</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-sm" data-icon="hard_hat">chef_hat</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Industrial Safety Helmet</p>
+<p class="text-[10px] text-slate-400 font-mono">SKU: SH-991-W</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-bold text-on-surface">45</td>
+<td class="px-6 py-5 text-sm text-slate-600">Internal (Bldg 4 Dept)</td>
+<td class="px-6 py-5 text-right">
+<span class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]" data-icon="done">done</span>
+                                        Success
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</body></html>

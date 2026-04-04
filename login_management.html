@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Precision Ledger - Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary": "#536167",
+              "tertiary-fixed-dim": "#ffb873",
+              "surface-tint": "#176684",
+              "surface-dim": "#d8dadb",
+              "on-tertiary-fixed": "#2d1600",
+              "on-secondary-fixed-variant": "#3b494f",
+              "on-error-container": "#93000a",
+              "surface-container-low": "#f2f4f5",
+              "on-tertiary": "#ffffff",
+              "on-background": "#191c1d",
+              "on-secondary-fixed": "#101d23",
+              "tertiary-fixed": "#ffdcbf",
+              "on-error": "#ffffff",
+              "surface-variant": "#e1e3e4",
+              "tertiary": "#6d3d00",
+              "outline": "#707880",
+              "on-surface": "#191c1d",
+              "primary": "#004f69",
+              "surface-container-highest": "#e1e3e4",
+              "secondary-container": "#d6e5ec",
+              "on-tertiary-fixed-variant": "#6a3b00",
+              "on-secondary": "#ffffff",
+              "primary-container": "#1a6886",
+              "inverse-on-surface": "#eff1f2",
+              "surface-container-lowest": "#ffffff",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#8dcff2",
+              "error-container": "#ffdad6",
+              "on-tertiary-container": "#ffd5b0",
+              "on-secondary-container": "#58676d",
+              "secondary-fixed-dim": "#bac9d0",
+              "secondary-fixed": "#d6e5ec",
+              "primary-fixed-dim": "#8dcff2",
+              "outline-variant": "#c0c7d0",
+              "background": "#f8fafb",
+              "surface": "#f8fafb",
+              "tertiary-container": "#8f5201",
+              "on-primary-fixed-variant": "#004d66",
+              "on-primary-fixed": "#001e2b",
+              "surface-container": "#eceeef",
+              "on-surface-variant": "#40484f",
+              "surface-container-high": "#e6e8e9",
+              "surface-bright": "#f8fafb",
+              "error": "#ba1a1a",
+              "inverse-surface": "#2e3132",
+              "primary-fixed": "#c1e8ff",
+              "on-primary-container": "#b1e3ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        background-color: rgba(225, 227, 228, 0.8);
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #c0c7d0;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-200/50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-950 flex flex-col h-full py-4 gap-1 z-50 overflow-y-auto custom-scrollbar">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</div>
+<div>
+<h1 class="font-bold text-lg text-cyan-900 dark:text-cyan-50 font-headline">The Precision Ledger</h1>
+<p class="text-[10px] uppercase tracking-widest text-secondary">Inventory Management</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 bg-cyan-100/50 dark:bg-cyan-900/30 text-cyan-900 dark:text-cyan-100 rounded-lg mx-2 transition-all scale-[0.98] active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-manrope text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-manrope text-sm font-medium">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">storage</span>
+<span class="font-manrope text-sm font-medium">Storage</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">inventory</span>
+<span class="font-manrope text-sm font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-manrope text-sm font-medium">Suppliers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">input</span>
+<span class="font-manrope text-sm font-medium">Stock In</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">output</span>
+<span class="font-manrope text-sm font-medium">Stock Out</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-manrope text-sm font-medium">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-manrope text-sm font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-manrope text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 py-4 mx-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm">
+<div class="flex items-center gap-3">
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container" data-alt="close up professional headshot of a person with friendly expression in office setting soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDpmTUEsQvrwvZ1fT-xyiREzaBOPFbj2OFCtNkczz1uqHHOd4QbdjcM0CjpuqW3w-gmqByd3oGY_raSVCbq04sIOaDblVfZ48Cw2jXy4a_oCCbEFjR5Jckm5D5kVDbvAyL-vSAqcW1Kt3iHfB6Vg8datWPqdi8zquoqOGfCeOyUDjeqz60y4Oicz5t0MrtE5vaSz17cc1txmRZSijFvkN4tLAkddUWSKKX6OeUyVI9h2YQvevTfL-sPraPX6TfyT_-aVgrTt18pXfo"/>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-bold truncate">Alex Sterling</p>
+<p class="text-[10px] text-secondary truncate">Inventory Manager</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 w-full border-b border-slate-200/50 dark:border-slate-800/50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none flex items-center justify-between px-8 h-16 w-full">
+<div class="flex items-center gap-8 flex-1">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search inventory, SKUs, or suppliers..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="p-8 space-y-8 max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<div class="flex items-end justify-between">
+<div>
+<h2 class="text-3xl font-extrabold font-headline tracking-tight text-primary">Executive Summary</h2>
+<p class="text-secondary mt-1">Status overview for <span class="font-semibold text-on-surface">Precision Logistics Hub #4</span></p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-b from-primary to-primary-container text-white font-semibold rounded-lg shadow-lg shadow-primary/10 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>Add New Product</span>
+</button>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-highest text-primary font-semibold rounded-lg hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span>Customize View</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid - Key Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Metric 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform duration-500"></div>
+<div class="flex flex-col gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</div>
+<div>
+<p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Total Products</p>
+<h3 class="text-3xl font-extrabold font-headline text-primary mt-1">12,482</h3>
+<p class="text-[10px] text-primary mt-2 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[12px]">trending_up</span>
+                                +4.2% from last month
+                            </p>
+</div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-error/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform duration-500"></div>
+<div class="flex flex-col gap-4">
+<div class="w-10 h-10 rounded-lg bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Low Stock Alerts</p>
+<h3 class="text-3xl font-extrabold font-headline text-error mt-1">18</h3>
+<p class="text-[10px] text-error mt-2 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[12px]">priority_high</span>
+                                Requires immediate attention
+                            </p>
+</div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform duration-500"></div>
+<div class="flex flex-col gap-4">
+<div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+<div>
+<p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Suppliers</p>
+<h3 class="text-3xl font-extrabold font-headline text-primary mt-1">84</h3>
+<p class="text-[10px] text-secondary mt-2 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[12px]">check_circle</span>
+                                3 new onboarded this week
+                            </p>
+</div>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-24 h-24 bg-cyan-100/30 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform duration-500"></div>
+<div class="flex flex-col gap-4">
+<div class="w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-900">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<div>
+<p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Total Value</p>
+<h3 class="text-3xl font-extrabold font-headline text-primary mt-1">$4.2M</h3>
+<p class="text-[10px] text-primary mt-2 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[12px]">trending_up</span>
+                                +12% YoY growth
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Large Layout: Chart and Quick Actions -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Stock Movement Chart -->
+<div class="lg:col-span-2 bg-surface-container-lowest p-8 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-xl font-bold font-headline">Stock Movement</h4>
+<p class="text-sm text-secondary">Inbound vs Outbound tracking (Weekly)</p>
+</div>
+<div class="flex gap-2">
+<span class="inline-flex items-center gap-2 px-3 py-1 bg-primary-fixed-dim/20 rounded-full text-xs font-semibold text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Stock In
+                            </span>
+<span class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container/30 rounded-full text-xs font-semibold text-secondary">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Stock Out
+                            </span>
+</div>
+</div>
+<!-- Visual Chart Placeholder -->
+<div class="h-64 flex items-end justify-between gap-4 px-2 relative border-b border-slate-100">
+<div class="absolute inset-0 flex flex-col justify-between py-1">
+<div class="w-full border-t border-slate-100/50"></div>
+<div class="w-full border-t border-slate-100/50"></div>
+<div class="w-full border-t border-slate-100/50"></div>
+<div class="w-full border-t border-slate-100/50"></div>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 relative z-10">
+<div class="w-full flex justify-center gap-1 items-end h-full">
+<div class="w-4 bg-primary rounded-t-sm" style="height: 40%"></div>
+<div class="w-4 bg-secondary rounded-t-sm" style="height: 60%"></div>
+</div>
+<span class="text-[10px] font-bold text-secondary">MON</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 relative z-10">
+<div class="w-full flex justify-center gap-1 items-end h-full">
+<div class="w-4 bg-primary rounded-t-sm" style="height: 55%"></div>
+<div class="w-4 bg-secondary rounded-t-sm" style="height: 30%"></div>
+</div>
+<span class="text-[10px] font-bold text-secondary">TUE</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 relative z-10">
+<div class="w-full flex justify-center gap-1 items-end h-full">
+<div class="w-4 bg-primary rounded-t-sm" style="height: 80%"></div>
+<div class="w-4 bg-secondary rounded-t-sm" style="height: 45%"></div>
+</div>
+<span class="text-[10px] font-bold text-secondary">WED</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 relative z-10">
+<div class="w-full flex justify-center gap-1 items-end h-full">
+<div class="w-4 bg-primary rounded-t-sm" style="height: 65%"></div>
+<div class="w-4 bg-secondary rounded-t-sm" style="height: 75%"></div>
+</div>
+<span class="text-[10px] font-bold text-secondary">THU</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 relative z-10">
+<div class="w-full flex justify-center gap-1 items-end h-full">
+<div class="w-4 bg-primary rounded-t-sm" style="height: 90%"></div>
+<div class="w-4 bg-secondary rounded-t-sm" style="height: 20%"></div>
+</div>
+<span class="text-[10px] font-bold text-secondary">FRI</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 relative z-10">
+<div class="w-full flex justify-center gap-1 items-end h-full">
+<div class="w-4 bg-primary rounded-t-sm" style="height: 25%"></div>
+<div class="w-4 bg-secondary rounded-t-sm" style="height: 15%"></div>
+</div>
+<span class="text-[10px] font-bold text-secondary">SAT</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2 relative z-10">
+<div class="w-full flex justify-center gap-1 items-end h-full">
+<div class="w-4 bg-primary rounded-t-sm" style="height: 10%"></div>
+<div class="w-4 bg-secondary rounded-t-sm" style="height: 5%"></div>
+</div>
+<span class="text-[10px] font-bold text-secondary">SUN</span>
+</div>
+</div>
+</div>
+<!-- Quick Actions Card -->
+<div class="bg-primary p-8 rounded-xl text-white flex flex-col justify-between shadow-xl shadow-primary/20">
+<div>
+<h4 class="text-xl font-bold font-headline mb-2">Quick Commands</h4>
+<p class="text-primary-fixed/70 text-sm">Efficient inventory handling.</p>
+</div>
+<div class="space-y-4 my-8">
+<button class="w-full group flex items-center justify-between p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all active:scale-[0.98]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">add_box</span>
+<span class="font-semibold">Stock In Item</span>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+<button class="w-full group flex items-center justify-between p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all active:scale-[0.98]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-semibold">Stock Out Item</span>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+<button class="w-full group flex items-center justify-between p-4 bg-white/10 rounded-xl hover:bg-white/20 transition-all active:scale-[0.98]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">description</span>
+<span class="font-semibold">Generate Report</span>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+</div>
+<p class="text-[10px] text-center text-primary-fixed/40 font-label tracking-widest uppercase">Precision Management System v2.4</p>
+</div>
+</div>
+<!-- Recent Activity List -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-12">
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-50 flex items-center justify-between">
+<h4 class="text-lg font-bold font-headline">Recent Activity</h4>
+<button class="text-primary text-sm font-semibold hover:underline">View All Log</button>
+</div>
+<div class="divide-y divide-slate-50">
+<!-- Activity Item 1 -->
+<div class="p-6 flex items-start gap-4 hover:bg-slate-50 transition-colors">
+<div class="mt-1 w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-800">
+<span class="material-symbols-outlined text-sm">move_to_inbox</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h5 class="text-sm font-bold">Stock In: Precision Bearings X-200</h5>
+<span class="text-[10px] text-secondary font-medium uppercase tracking-tight">2 mins ago</span>
+</div>
+<p class="text-sm text-secondary mt-1">500 units received from <span class="text-primary font-medium">SKF Industrial</span>. Location: Zone B-12.</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="p-6 flex items-start gap-4 hover:bg-slate-50 transition-colors">
+<div class="mt-1 w-8 h-8 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-sm">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h5 class="text-sm font-bold text-error">Low Stock Alert: Hydraulic Fluid</h5>
+<span class="text-[10px] text-secondary font-medium uppercase tracking-tight">45 mins ago</span>
+</div>
+<p class="text-sm text-secondary mt-1">Quantity dropped below threshold (Current: 12L). Triggering auto-restock.</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="p-6 flex items-start gap-4 hover:bg-slate-50 transition-colors">
+<div class="mt-1 w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h5 class="text-sm font-bold">Supplier Updated: Global Gears Ltd.</h5>
+<span class="text-[10px] text-secondary font-medium uppercase tracking-tight">3 hours ago</span>
+</div>
+<p class="text-sm text-secondary mt-1">Updated primary contact information and tax ID for vendor profile.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Card/Banner -->
+<div class="bg-surface-container-high rounded-xl overflow-hidden flex flex-col relative min-h-[400px]">
+<div class="absolute inset-0 z-0">
+<img alt="Modern warehouse interior" class="w-full h-full object-cover opacity-30 grayscale" data-alt="cinematic interior of high tech automated warehouse with glowing blue accents and high ceiling perspective" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxpL4Fl2-39xBZduGzCrhICDeJrm_n2_E1uWYcd3QPaKZ4gCK8luwvqzirlzF4P06Q-f304_puyPYny62vpDso36Cko4JtIHOQKcK2rHSUi2hSmz8zbtHo8gVkETE8KL2CNIxvXOmXDAW0jmgljUhnZOdMPUXvQAHT-taoTJ44K4GISGMqrOfJJ2aE660Rv6Yb33ZeNg0Yq8oQeZplU3kNHy77BgA8E1BRudUM6KQQQh79hlYdMNSwqpXBB2xuq_No3oiU2mfrY3o_"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-high via-surface-container-high/80 to-transparent"></div>
+</div>
+<div class="relative z-10 p-8 mt-auto">
+<span class="inline-block px-3 py-1 bg-primary text-white text-[10px] font-bold rounded-full mb-4 uppercase tracking-widest">Efficiency Tip</span>
+<h4 class="text-2xl font-bold font-headline leading-tight text-primary">Automated FIFO is now live.</h4>
+<p class="text-sm text-secondary mt-2">The system now automatically prioritizes older stock for outbound requests to minimize waste and depreciation.</p>
+<button class="mt-6 flex items-center gap-2 text-primary font-bold text-sm hover:translate-x-1 transition-transform">
+                            Learn how it works <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for quick mobile/tablet access (hidden on desktop nav logic) -->
+<div class="fixed bottom-8 right-8 z-50 md:hidden">
+<button class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-2xl active:scale-90 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</body></html>

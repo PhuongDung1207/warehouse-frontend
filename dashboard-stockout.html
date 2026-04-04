@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Logictisc Web - DashBoard StockOut</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary": "#536167",
+              "surface-dim": "#d8dadb",
+              "surface-container-low": "#f2f4f5",
+              "on-surface": "#191c1d",
+              "primary": "#004f69",
+              "primary-container": "#1a6886",
+              "inverse-on-surface": "#eff1f2",
+              "surface-container-lowest": "#ffffff",
+              "on-primary": "#ffffff",
+              "background": "#f8fafb",
+              "surface": "#f8fafb",
+              "error": "#ba1a1a"
+            },
+            fontFamily: {
+              "headline": ["Manrope", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+              "label": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #c0c7d0;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed">
+
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-200/50 bg-slate-50 flex flex-col h-full py-4 gap-1 z-50 overflow-y-auto custom-scrollbar">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+</div>
+<div>
+<h1 class="font-bold text-lg text-cyan-900 font-headline">Logictisc Web</h1>
+<p class="text-[10px] uppercase tracking-widest text-secondary">Inventory Management</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 mx-2 hover:bg-slate-200/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-manrope text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 mx-2 hover:bg-slate-200/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-manrope text-sm font-medium">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 mx-2 hover:bg-slate-200/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">storage</span>
+<span class="font-manrope text-sm font-medium">Storage</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 mx-2 hover:bg-slate-200/50 rounded-lg transition-all duration-150 active:scale-95" href="inventory.html">
+<span class="material-symbols-outlined">inventory</span>
+<span class="font-manrope text-sm font-medium">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 mx-2 hover:bg-slate-200/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-manrope text-sm font-medium">Suppliers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 mx-2 hover:bg-slate-200/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">input</span>
+<span class="font-manrope text-sm font-medium">Stock In</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 mx-2 hover:bg-slate-200/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">output</span>
+<span class="font-manrope text-sm font-medium">Stock Out</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 mx-2 hover:bg-slate-200/50 rounded-lg transition-all duration-150 active:scale-95" href="reports.html">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-manrope text-sm font-medium">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 mx-2 hover:bg-slate-200/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-manrope text-sm font-medium">Users</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 mx-2 hover:bg-slate-200/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockin.html">
+<span class="material-symbols-outlined">download</span>
+<span class="font-manrope text-sm font-medium">DashBoard StockIn</span>
+</a>
+<!-- Active: DashBoard StockOut -->
+<a class="flex items-center gap-3 px-4 py-3 bg-cyan-100/50 text-cyan-900 rounded-lg mx-2 transition-all scale-[0.98] active:scale-95 duration-150" href="dashboard-stockout.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+<span class="font-manrope text-sm font-medium">DashBoard StockOut</span>
+</a>
+</nav>
+
+<div class="mt-auto px-4 py-4 mx-2 bg-slate-200/50 rounded-xl shadow-sm hover:bg-slate-200 transition-colors cursor-pointer flex items-center justify-between">
+    <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-red-300 flex items-center justify-center text-red-900 font-bold text-xs">S</div>
+        <div class="flex-1 min-w-0">
+            <p class="text-xs font-bold truncate text-slate-800">Nguyễn Văn A</p>
+            <p class="text-[10px] text-secondary truncate">Admin</p>
+        </div>
+    </div>
+    <span class="material-symbols-outlined text-slate-500 text-sm">logout</span>
+</div>
+</aside>
+
+<!-- Main Content Area -->
+<main class="ml-64 flex flex-col min-h-screen bg-slate-50 relative pb-10">
+    <div class="p-8 space-y-6 max-w-[1400px] mx-auto w-full">
+        <!-- Page Header -->
+        <div class="flex items-center justify-between">
+            <h2 class="text-3xl font-bold font-headline tracking-tight text-[#004f69]">Operations Overview</h2>
+            <div class="flex items-center gap-3">
+                <button class="flex items-center gap-2 px-4 py-2 border border-slate-200 bg-white text-slate-600 font-semibold rounded-lg hover:bg-slate-50 transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                    <span>Today</span>
+                </button>
+                <button class="flex items-center gap-2 px-5 py-2.5 bg-[#004f69] hover:bg-[#003d52] text-white font-semibold rounded-lg transition-colors active:scale-95">
+                    <span class="material-symbols-outlined text-sm">add_box</span>
+                    <span>New Shipment</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 4 Metric Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Card 1 -->
+            <div class="bg-white p-6 rounded-xl border-l-[3px] border-[#004f69] shadow-sm flex flex-col justify-between">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="text-[#004f69]">
+                        <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+                    </div>
+                    <span class="bg-[#e0f2fe] text-[#0369a1] text-[10px] font-bold px-2 py-1 rounded-full">+12%</span>
+                </div>
+                <div>
+                    <p class="text-secondary text-xs font-medium mb-1">Total Shipped (Today)</p>
+                    <h3 class="text-2xl font-extrabold text-slate-800 font-headline">1,284</h3>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-white p-6 rounded-xl border-l-[3px] border-[#ca8a04] shadow-sm flex flex-col justify-between">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="text-[#ca8a04]">
+                        <span class="material-symbols-outlined text-[20px]">inventory</span>
+                    </div>
+                    <span class="bg-[#fef9c3] text-[#854d0e] text-[10px] font-bold px-2 py-1 rounded-full">High Priority</span>
+                </div>
+                <div>
+                    <p class="text-secondary text-xs font-medium mb-1">Pending Shipments</p>
+                    <h3 class="text-2xl font-extrabold text-slate-800 font-headline">42</h3>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-white p-6 rounded-xl border-l-[3px] border-[#10b981] shadow-sm flex flex-col justify-between">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="text-[#10b981]">
+                        <span class="material-symbols-outlined text-[20px]">payments</span>
+                    </div>
+                    <span class="bg-[#dcfce7] text-[#166534] text-[10px] font-bold px-2 py-1 rounded-full">Optimized</span>
+                </div>
+                <div>
+                    <p class="text-secondary text-xs font-medium mb-1">Average Order Value</p>
+                    <h3 class="text-2xl font-extrabold text-slate-800 font-headline">$4,210</h3>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="bg-white p-6 rounded-xl border-l-[3px] border-red-500 shadow-sm flex flex-col justify-between">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="text-red-500">
+                        <span class="material-symbols-outlined text-[20px]">assignment_return</span>
+                    </div>
+                    <span class="bg-red-50 text-red-600 text-[10px] font-bold px-2 py-1 rounded-full">-2.4%</span>
+                </div>
+                <div>
+                    <p class="text-secondary text-xs font-medium mb-1">Return Rate</p>
+                    <h3 class="text-2xl font-extrabold text-slate-800 font-headline">1.8%</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Row: Chart & Actions -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Line Chart Section -->
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h4 class="text-lg font-bold font-headline text-slate-800">Shipment Status Trends</h4>
+                        <p class="text-xs text-slate-400">Performance tracking for outgoing inventory (7 Days)</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-500">
+                            <span class="w-2 h-2 rounded-full bg-[#004f69]"></span> Shipped
+                        </div>
+                        <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-500">
+                            <span class="w-2 h-2 rounded-full bg-[#8dcff2]"></span> Processing
+                        </div>
+                    </div>
+                </div>
+                <div class="h-60 w-full relative">
+                    <canvas id="shipmentTrendsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Quick Actions Section -->
+            <div class="space-y-6">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+                    <h4 class="text-lg font-bold font-headline text-slate-800 mb-4">Quick Actions</h4>
+                    <div class="space-y-3">
+                        <button class="w-full flex items-center justify-between p-3.5 bg-white border border-slate-100 rounded-lg shadow-sm hover:bg-slate-50 hover:shadow transition-all group">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[#004f69] text-[20px]">rocket_launch</span>
+                                <span class="font-bold text-sm text-slate-800 group-hover:text-[#004f69]">Create New Shipment</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-400 text-[18px]">chevron_right</span>
+                        </button>
+                        <button class="w-full flex items-center justify-between p-3.5 bg-white border border-slate-100 rounded-lg shadow-sm hover:bg-slate-50 hover:shadow transition-all group">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[#004f69] text-[20px]">list_alt</span>
+                                <span class="font-bold text-sm text-slate-800 group-hover:text-[#004f69]">View All Orders</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-400 text-[18px]">chevron_right</span>
+                        </button>
+                        <button class="w-full flex items-center justify-between p-3.5 bg-white border border-slate-100 rounded-lg shadow-sm hover:bg-slate-50 hover:shadow transition-all group">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-[#004f69] text-[20px]">description</span>
+                                <span class="font-bold text-sm text-slate-800 group-hover:text-[#004f69]">Generate Shipping Report</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-400 text-[18px]">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- System Status -->
+                <div class="bg-[#f1f5f9] rounded-xl border border-slate-200 p-5">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined text-[#004f69] text-[18px]">info</span>
+                        <h5 class="text-xs font-bold uppercase tracking-widest text-[#004f69]">System Status</h5>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">Logistics API is running optimally. 4 major carrier updates synchronized 12 mins ago.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Shipments Table -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mt-6">
+            <div class="p-6 flex items-center justify-between border-b border-slate-50">
+                <h4 class="text-xl font-bold font-headline text-slate-800">Recent Shipments</h4>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400 font-semibold">Filter By:</span>
+                    <button class="flex items-center gap-1 px-3 py-1.5 border border-slate-200 rounded-md text-xs font-bold text-slate-600 hover:bg-slate-50">
+                        Destinations <span class="material-symbols-outlined text-[16px]">expand_more</span>
+                    </button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-400 text-[10px] uppercase tracking-wider font-semibold">
+                            <th class="px-6 py-4">ORDER ID</th>
+                            <th class="px-6 py-4">PRODUCT</th>
+                            <th class="px-6 py-4">QUANTITY</th>
+                            <th class="px-6 py-4">DESTINATION</th>
+                            <th class="px-6 py-4">STATUS</th>
+                            <th class="px-6 py-4">TIMESTAMP</th>
+                            <th class="px-6 py-4 text-center">ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm">
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-[#004f69]">#ORD-8821</td>
+                            <td class="px-6 py-4 flex items-center gap-3">
+                                <div class="w-6 h-6 bg-slate-200 rounded-sm"></div>
+                                <div>
+                                    <p class="font-bold text-slate-800">Neo-Watch</p>
+                                    <p class="text-[10px] text-slate-500">Series 5</p>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-slate-600">450 Units</td>
+                            <td class="px-6 py-4 text-slate-600 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">location_on</span> Berlin, DE
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex px-3 py-1 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">Shipped</span>
+                            </td>
+                            <td class="px-6 py-4 text-xs text-slate-500">14:22 Today</td>
+                            <td class="px-6 py-4 text-center">
+                                <button class="px-4 py-1.5 bg-[#8dcff2]/30 text-[#004f69] font-bold text-[10px] rounded hover:bg-[#8dcff2]/50 transition-colors">STOCK IN</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-[#004f69]">#ORD-8819</td>
+                            <td class="px-6 py-4 flex items-center gap-3">
+                                <div class="w-6 h-6 bg-slate-200 rounded-sm flex items-center justify-center"><span class="material-symbols-outlined text-[14px] text-slate-500">headphones</span></div>
+                                <div>
+                                    <p class="font-bold text-slate-800">Acoustix</p>
+                                    <p class="text-[10px] text-slate-500">Wireless</p>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-slate-600">1,200 Units</td>
+                            <td class="px-6 py-4 text-slate-600 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">location_on</span> Austin, US
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex px-3 py-1 rounded-full text-[10px] font-bold bg-slate-200 text-slate-600">Processing</span>
+                            </td>
+                            <td class="px-6 py-4 text-xs text-slate-500">12:05 Today</td>
+                            <td class="px-6 py-4 text-center">
+                                <button class="px-4 py-1.5 bg-slate-200/50 text-slate-500 font-bold text-[10px] rounded hover:bg-slate-200 transition-colors">STOCK OUT</button>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-[#004f69]">#ORD-8815</td>
+                            <td class="px-6 py-4 flex items-center gap-3">
+                                <div class="w-6 h-6 bg-slate-800 rounded-sm flex items-center justify-center"><span class="material-symbols-outlined text-[14px] text-white">camera</span></div>
+                                <div>
+                                    <p class="font-bold text-slate-800">Optic Pro</p>
+                                    <p class="text-[10px] text-slate-500">Lens Kit</p>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-slate-600">85 Units</td>
+                            <td class="px-6 py-4 text-slate-600 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">location_on</span> Tokyo, JP
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-flex px-3 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-600">Delayed</span>
+                            </td>
+                            <td class="px-6 py-4 text-xs text-slate-500">09:15 Today</td>
+                            <td class="px-6 py-4 text-center">
+                                <button class="px-4 py-1.5 bg-[#8dcff2]/30 text-[#004f69] font-bold text-[10px] rounded hover:bg-[#8dcff2]/50 transition-colors">STOCK IN</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-4 border-t border-slate-100 flex justify-center text-center">
+                <a href="#" class="text-sm font-bold text-[#004f69] hover:underline">View All Historical Shipments</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Initialize Chart.js for Shipment Trends
+    const ctx = document.getElementById('shipmentTrendsChart').getContext('2d');
+    
+    // Create subtle gradient for the line
+    let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(0, 79, 105, 0.1)'); // Primary color tint
+    gradient.addColorStop(1, 'rgba(0, 79, 105, 0)');
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+            datasets: [
+                {
+                    label: 'Shipped',
+                    data: [120, 240, 360, 220, 190, 400, 500], // Mock trend matching the mock image
+                    borderColor: '#004f69',
+                    borderWidth: 2,
+                    backgroundColor: gradient,
+                    tension: 0.4, // Smooth curve
+                    pointRadius: 0,
+                    pointHoverRadius: 6,
+                    fill: false // Not filled in image exactly, looks like just a clean line
+                }
+            ]
+        },
+        options: { 
+            responsive: true, 
+            maintainAspectRatio: false, 
+            plugins: { 
+                legend: { 
+                    display: false // Legend exists custom in HTML above chart
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 79, 105, 0.9)',
+                    titleFont: { family: 'Inter', size: 12 },
+                    bodyFont: { family: 'Inter', size: 14, weight: 'bold' },
+                    padding: 10,
+                    cornerRadius: 8,
+                    displayColors: false
+                }
+            },
+            scales: {
+                y: {
+                    display: false, // Hidden Y axis lines based on image
+                    beginAtZero: true
+                },
+                x: {
+                    grid: {
+                        color: '#f1f5f9', // subtle vertical lines
+                        drawBorder: false
+                    },
+                    ticks: {
+                        font: { family: 'Inter', size: 10, weight: 'bold' },
+                        color: '#94a3b8' // Slate-400
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
