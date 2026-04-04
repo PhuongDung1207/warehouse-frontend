@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warehouse Categories</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">L</div>
+          <div>
+            <strong>Logistic Web</strong>
+            <span>Inventory Management</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Primary">
+          <a href="#" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 12.5 12 5l8 7.5M6.5 10.5V19h11v-8.5" />
+              </svg>
+            </span>
+            Dashboard
+          </a>
+          <a href="#" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 7.5h16M4 12h16M4 16.5h11M6 5v14" />
+              </svg>
+            </span>
+            Stock In
+          </a>
+          <a href="#" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M20 7.5H4M20 12H4M20 16.5H9M18 5v14" />
+              </svg>
+            </span>
+            Stock Out
+          </a>
+          <a href="#" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 8h14v11H5zM8 8V5h8v3" />
+              </svg>
+            </span>
+            Storage
+          </a>
+          <a href="#" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M6 9.5h12M8 6.5h8M9 13.5h6M5 4h14v16H5z" />
+              </svg>
+            </span>
+            Suppliers
+          </a>
+          <a href="#" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 7h14v10H5zM9 11.5h6" />
+              </svg>
+            </span>
+            Products
+          </a>
+          <a href="#" class="nav-link active" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M7 8.5h10M7 12h10M7 15.5h6M4.5 5h15v14h-15z" />
+              </svg>
+            </span>
+            Categories
+          </a>
+          <a href="#" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M6 5h12v14H6zM9 9h6M9 13h6" />
+              </svg>
+            </span>
+            Reports
+          </a>
+          <a href="#" class="nav-link">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 6a6 6 0 0 1 12 0" />
+              </svg>
+            </span>
+            Users
+          </a>
+        </nav>
+
+        <div class="sidebar-user">
+          <div class="user-avatar">S</div>
+          <div class="user-meta">
+            <strong>Nguyen Van A</strong>
+            <span>Admin</span>
+          </div>
+          <button class="logout-btn" type="button" aria-label="Log out">
+            <svg viewBox="0 0 24 24">
+              <path d="M14 7l5 5-5 5M19 12H9M10 5H5v14h5" />
+            </svg>
+          </button>
+        </div>
+      </aside>
+
+      <main class="content">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Categories Management</p>
+            <h1>Categories Management</h1>
+            <p>
+              Organize and curate your stock across specialized departments with
+              precision auditing.
+            </p>
+          </div>
+          <button class="primary-btn" id="open-category-modal" type="button">
+            <span>+</span>
+            Add new Category
+          </button>
+        </section>
+
+        <section class="stats-grid" aria-label="Category statistics">
+          <article class="stat-card stat-card-primary">
+            <span>Active Categories</span>
+            <strong id="active-count">05</strong>
+          </article>
+          <article class="stat-card stat-card-success">
+            <span>Total Categories</span>
+            <strong id="total-count">05</strong>
+          </article>
+          <article class="stat-card stat-card-danger">
+            <span>Lock Categories</span>
+            <strong id="locked-count">00</strong>
+          </article>
+        </section>
+
+        <section class="panel">
+          <label class="search-box" for="search-input">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M10.5 18a7.5 7.5 0 1 1 5.3-2.2L21 21" />
+            </svg>
+            <input
+              id="search-input"
+              type="search"
+              placeholder="Search Category..."
+              autocomplete="off"
+            />
+          </label>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Category Name</th>
+                  <th>Quantity</th>
+                  <th>Total Value</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="category-table-body"></tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <p id="results-summary">Showing 1 to 5 of 5 categories</p>
+            <div class="pagination" id="pagination"></div>
+          </div>
+        </section>
+
+        <section class="audit-section">
+          <div class="section-header">
+            <h2>Category Activity Audit</h2>
+            <a href="#">View Full Log</a>
+          </div>
+          <div class="audit-list" id="audit-list"></div>
+        </section>
+      </main>
+
+      <div class="modal-backdrop hidden" id="category-modal-backdrop">
+        <section
+          class="category-modal"
+          id="category-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="category-modal-title"
+        >
+          <div class="modal-head">
+            <h2 id="category-modal-title">Add new Category</h2>
+            <p>Create a new product category for your inventory</p>
+          </div>
+
+          <form class="category-form" id="category-form">
+            <label class="form-field" for="category-code">
+              <span>Code</span>
+              <input
+                id="category-code"
+                name="code"
+                type="text"
+                placeholder="Enter category code"
+                maxlength="24"
+                required
+              />
+            </label>
+
+            <label class="form-field" for="category-name">
+              <span>Name</span>
+              <input
+                id="category-name"
+                name="name"
+                type="text"
+                placeholder="Enter category name"
+                maxlength="60"
+                required
+              />
+            </label>
+
+            <p class="form-feedback" id="form-feedback" aria-live="polite"></p>
+
+            <div class="modal-actions">
+              <button class="secondary-btn" id="close-category-modal" type="button">
+                Cancel
+              </button>
+              <button class="submit-btn" type="submit">Add Category</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
