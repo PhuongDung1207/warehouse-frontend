@@ -231,6 +231,13 @@
     });
   }
 
+  function createCategory(payload) {
+    return request("/api/v1/categories", {
+      method: "POST",
+      body: payload
+    });
+  }
+
   function listUnits(query) {
     return request("/api/v1/units", {
       query: query || {}
@@ -246,6 +253,19 @@
 
   function listUsers(query) {
     return request("/api/v1/users", {
+      query: query || {}
+    });
+  }
+
+  function createUser(payload) {
+    return request("/api/v1/users", {
+      method: "POST",
+      body: payload
+    });
+  }
+
+  function listRoles(query) {
+    return request("/api/v1/roles", {
       query: query || {}
     });
   }
@@ -271,6 +291,55 @@
 
   function getDashboardReport() {
     return request("/api/v1/reports/dashboard");
+  }
+  
+  function createStockIn(payload) {
+    return request("/api/v1/stock-ins", {
+      method: "POST",
+      body: payload
+    });
+  }
+
+  function confirmStockIn(id) {
+    return request("/api/v1/stock-ins/" + id + "/confirm", {
+      method: "POST"
+    });
+  }
+
+  function listStockIns(query) {
+    return request("/api/v1/stock-ins", {
+      query: query || {}
+    });
+  }
+
+  function createStockOut(payload) {
+    return request("/api/v1/stock-outs", {
+      method: "POST",
+      body: payload
+    });
+  }
+
+  function confirmStockOut(id) {
+    return request("/api/v1/stock-outs/" + id + "/confirm", {
+      method: "POST"
+    });
+  }
+
+  function listStockOuts(query) {
+    return request("/api/v1/stock-outs", {
+      query: query || {}
+    });
+  }
+
+  function getWarehouses() {
+    return request("/api/v1/warehouses");
+  }
+
+  function createWarehouse(payload) {
+    return request("/api/v1/warehouses", {
+      method: "POST",
+      body: payload
+    });
   }
 
   function getStockSummary(query) {
@@ -306,13 +375,22 @@
   app.api = {
     buildQueryString: buildQueryString,
     clearSession: clearSession,
+    createWarehouse: createWarehouse,
     createProduct: createProduct,
+    createCategory: createCategory,
     createStockCheck: createStockCheck,
+    createStockIn: createStockIn,
+    confirmStockIn: confirmStockIn,
+    listStockIns: listStockIns,
+    createStockOut: createStockOut,
+    confirmStockOut: confirmStockOut,
+    listStockOuts: listStockOuts,
     download: download,
     getCurrentUser: getCurrentUser,
     getDashboardReport: getDashboardReport,
     getLowStocks: getLowStocks,
     getProducts: getProducts,
+    getWarehouses: getWarehouses,
     getStockInSummary: getStockInSummary,
     getStockMovementChart: getStockMovementChart,
     getStocks: getStocks,
@@ -324,6 +402,8 @@
     listSuppliers: listSuppliers,
     listSuppliersPage: listSuppliersPage,
     listUsers: listUsers,
+    createUser: createUser,
+    listRoles: listRoles,
     login: login,
     logout: logout,
     request: request,

@@ -136,13 +136,17 @@
       return;
     }
 
-    const [stockSummaryPayload, stockInPayload, stockOutPayload, chartPayload] =
-      await Promise.all([
-        api.getStockSummary({ limit: 100, offset: 0 }),
-        api.getStockInSummary({ limit: 20, offset: 0 }),
-        api.getStockOutSummary({ limit: 20, offset: 0 }),
-        api.getStockMovementChart({ groupBy: "week" })
-      ]);
+    const results = await Promise.allSettled([
+      api.getStockSummary({ limit: 100, offset: 0 }),
+      api.getStockInSummary({ limit: 20, offset: 0 }),
+      api.getStockOutSummary({ limit: 20, offset: 0 }),
+      api.getStockMovementChart({ groupBy: "week" })
+    ]);
+
+    const stockSummaryPayload = results[0].status === "fulfilled" ? results[0].value : { data: {} };
+    const stockInPayload = results[1].status === "fulfilled" ? results[1].value : { data: {} };
+    const stockOutPayload = results[2].status === "fulfilled" ? results[2].value : { data: {} };
+    const chartPayload = results[3].status === "fulfilled" ? results[3].value : { data: {} };
 
     const stockSummary = stockSummaryPayload.data || {};
     const stockInSummary = stockInPayload.data || {};

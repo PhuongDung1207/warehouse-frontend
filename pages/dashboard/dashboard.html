@@ -11,6 +11,8 @@
 <!-- Icons -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -110,55 +112,6 @@
 </div>
 </div>
 <nav class="flex-1 space-y-1">
-<!-- Active: Dashboard -->
-<a class="flex items-center gap-3 px-4 py-3 bg-cyan-100/50 dark:bg-cyan-900/30 text-cyan-900 dark:text-cyan-100 rounded-lg mx-2 transition-all scale-[0.98] active:scale-95 duration-150" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-<span class="font-manrope text-sm font-medium">Dashboard</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
-<span class="material-symbols-outlined">category</span>
-<span class="font-manrope text-sm font-medium">Categories</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
-<span class="material-symbols-outlined">storage</span>
-<span class="font-manrope text-sm font-medium">Storage</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
-<span class="material-symbols-outlined">inventory</span>
-<span class="font-manrope text-sm font-medium">Products</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
-<span class="material-symbols-outlined">local_shipping</span>
-<span class="font-manrope text-sm font-medium">Suppliers</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
-<span class="material-symbols-outlined">input</span>
-<span class="font-manrope text-sm font-medium">Stock In</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
-<span class="material-symbols-outlined">output</span>
-<span class="font-manrope text-sm font-medium">Stock Out</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
-<span class="material-symbols-outlined">analytics</span>
-<span class="font-manrope text-sm font-medium">Reports</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
-<span class="material-symbols-outlined">group</span>
-<span class="font-manrope text-sm font-medium">Users</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-cyan-800 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockin.html">
-<span class="material-symbols-outlined">download</span>
-<span class="font-manrope text-sm font-medium">DashBoard StockIn</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-cyan-800 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockout.html">
-<span class="material-symbols-outlined">local_shipping</span>
-<span class="font-manrope text-sm font-medium">DashBoard StockOut</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-manrope text-sm font-medium">Settings</span>
-</a>
 </nav>
 <div class="mt-auto px-4 py-4 mx-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm">
 <div class="flex items-center gap-3">

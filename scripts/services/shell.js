@@ -11,9 +11,9 @@
     "Stock Out": "/pages/inventory/stock_out.html",
     "DashBoard StockIn": "/pages/dashboard/dashboard-stockin.html",
     "DashBoard StockOut": "/pages/dashboard/dashboard-stockout.html",
-    Categories: "/pages/inventory/inventory.html",
-    Storage: "/pages/inventory/inventory.html",
-    Suppliers: "/pages/inventory/inventory.html",
+    Categories: "/pages/inventory/categories.html",
+    Storage: "/pages/inventory/storage.html",
+    Suppliers: "/pages/inventory/suppliers.html",
     Settings: "/pages/settings/team.html"
   };
 
@@ -30,6 +30,15 @@
       style: "currency",
       currency: "USD",
       maximumFractionDigits: 0
+    }).format(Number(value) || 0);
+  }
+
+  function formatCompactCurrency(value) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      notation: "compact",
+      maximumFractionDigits: 1
     }).format(Number(value) || 0);
   }
 
@@ -60,8 +69,35 @@
   }
 
   function setNavigationLinks() {
+    const api = getApi();
+    const nav = document.querySelector("nav");
+    
+    if (nav && nav.children.length === 0) {
+      const menuItems = [
+        { label: "Dashboard", icon: "dashboard", href: NAVIGATION_MAP.Dashboard },
+        { label: "Categories", icon: "category", href: NAVIGATION_MAP.Categories },
+        { label: "Storage", icon: "storage", href: NAVIGATION_MAP.Storage },
+        { label: "Products", icon: "inventory", href: NAVIGATION_MAP.Products },
+        { label: "Suppliers", icon: "local_shipping", href: NAVIGATION_MAP.Suppliers },
+        { label: "Stock In", icon: "input", href: NAVIGATION_MAP["Stock In"] },
+        { label: "Stock Out", icon: "output", href: NAVIGATION_MAP["Stock Out"] },
+        { label: "Reports", icon: "analytics", href: NAVIGATION_MAP.Reports },
+        { label: "Users", icon: "group", href: NAVIGATION_MAP.Users },
+        { label: "Settings", icon: "settings", href: NAVIGATION_MAP.Settings }
+      ];
+
+      nav.innerHTML = menuItems.map(item => `
+        <a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="${item.href}">
+          <span class="material-symbols-outlined">${item.icon}</span>
+          <span class="font-manrope text-sm font-medium">${item.label}</span>
+        </a>
+      `).join("");
+    }
+
     document.querySelectorAll("nav a").forEach(function (anchor) {
-      const label = anchor.textContent.replace(/\s+/g, " ").trim();
+      // Find the span that contains the menu text (it's usually the one without 'material-symbols-outlined')
+      const labelSpan = anchor.querySelector('span:not(.material-symbols-outlined)');
+      const label = labelSpan ? labelSpan.textContent.trim() : anchor.textContent.replace(/\s+/g, " ").trim();
       const target = NAVIGATION_MAP[label];
 
       if (target) {
@@ -85,12 +121,15 @@
 
     document.querySelectorAll("nav a").forEach(function (anchor) {
       const anchorPath = anchor.getAttribute("href");
-      const isActive = anchorPath && anchorPath === currentPath;
+      const isActive = anchorPath && anchorPath !== "#" && window.location.pathname.endsWith(anchorPath);
 
       anchor.removeAttribute("aria-current");
+      anchor.classList.remove("bg-cyan-100/50", "text-cyan-900", "dark:bg-cyan-900/30", "dark:text-cyan-100", "scale-[0.98]");
 
       if (isActive) {
         anchor.setAttribute("aria-current", "page");
+        anchor.classList.add("bg-cyan-100/50", "text-cyan-900", "dark:bg-cyan-900/30", "dark:text-cyan-100", "scale-[0.98]");
+        anchor.classList.remove("text-slate-600", "dark:text-slate-400");
       }
     });
   }
@@ -174,6 +213,7 @@
     applyUserToLayout: applyUserToLayout,
     escapeHtml: escapeHtml,
     formatCurrency: formatCurrency,
+    formatCompactCurrency: formatCompactCurrency,
     formatDate: formatDate,
     formatNumber: formatNumber,
     initializeProtectedPage: initializeProtectedPage,
