@@ -190,7 +190,7 @@
 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Search SKU or Scan Barcode</label>
 <div class="relative">
 <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400">qr_code_scanner</span>
-<input class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-transparent focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10 rounded-lg transition-all text-on-surface font-medium" placeholder="Enter SKU code or scan item..." type="text"/>
+<input id="stock-in-sku" class="w-full pl-12 pr-4 py-3.5 bg-surface-container-low border-transparent focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10 rounded-lg transition-all text-on-surface font-medium" placeholder="Enter SKU code or scan item..." type="text"/>
 </div>
 </div>
 </div>
@@ -231,22 +231,19 @@
 <div>
 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Quantity to Receive</label>
 <div class="flex items-center">
-<button class="w-12 h-12 flex items-center justify-center bg-surface-container-low text-primary rounded-l-lg hover:bg-surface-container-high transition-colors">
+<button id="qty-minus" class="w-12 h-12 flex items-center justify-center bg-surface-container-low text-primary rounded-l-lg hover:bg-surface-container-high transition-colors">
 <span class="material-symbols-outlined">remove</span>
 </button>
-<input class="w-full h-12 text-center border-y-transparent bg-surface-container-low font-bold text-lg focus:ring-0 focus:border-transparent" type="number" value="250"/>
-<button class="w-12 h-12 flex items-center justify-center bg-surface-container-low text-primary rounded-r-lg hover:bg-surface-container-high transition-colors">
+<input id="stock-in-quantity" class="w-full h-12 text-center border-y-transparent bg-surface-container-low font-bold text-lg focus:ring-0 focus:border-transparent" type="number" value="250"/>
+<button id="qty-plus" class="w-12 h-12 flex items-center justify-center bg-surface-container-low text-primary rounded-r-lg hover:bg-surface-container-high transition-colors">
 <span class="material-symbols-outlined">add</span>
 </button>
 </div>
 </div>
 <div>
 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Storage Bin/Location</label>
-<select class="w-full px-4 py-3 bg-surface-container-low border-transparent focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10 rounded-lg transition-all text-on-surface font-medium appearance-none">
-<option>Zone A - Shelf 04 (High Priority)</option>
-<option>Zone B - Shelf 12 (General)</option>
-<option>Zone C - Cold Storage 01</option>
-<option>Loading Dock 02 (Temporary)</option>
+<select id="stock-in-location" class="w-full px-4 py-3 bg-surface-container-low border-transparent focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10 rounded-lg transition-all text-on-surface font-medium appearance-none">
+<option value="">Select storage location...</option>
 </select>
 </div>
 </div>
@@ -259,7 +256,7 @@
 </div>
 <h3 class="font-manrope text-lg font-bold text-primary">Administrative Notes</h3>
 </div>
-<textarea class="w-full px-4 py-3 bg-surface-container-low border-transparent focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10 rounded-lg transition-all text-on-surface font-medium text-sm" placeholder="Add details regarding shipment condition, damaged packaging, or special handling instructions..." rows="3"></textarea>
+<textarea id="stock-in-notes" class="w-full px-4 py-3 bg-surface-container-low border-transparent focus:border-primary focus:bg-white focus:ring-4 focus:ring-primary/10 rounded-lg transition-all text-on-surface font-medium text-sm" placeholder="Add details regarding shipment condition, damaged packaging, or special handling instructions..." rows="3"></textarea>
 </div>
 </div>
 <!-- Right Column: Contextual Sidebar Info -->
@@ -272,14 +269,16 @@
 <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Supplier Source</label>
 <div class="relative">
 <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-sm">local_shipping</span>
-<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-low border-transparent rounded-lg text-sm font-semibold" type="text" value="Apex Industrial Supply"/>
+<select id="stock-in-supplier-id" class="w-full pl-10 pr-4 py-2.5 bg-surface-container-low border-transparent rounded-lg text-sm font-semibold appearance-none focus:ring-primary/20">
+<option value="">Select supplier...</option>
+</select>
 </div>
 </div>
 <div>
 <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Arrival Date</label>
 <div class="relative">
 <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 text-sm">calendar_today</span>
-<input class="w-full pl-10 pr-4 py-2.5 bg-surface-container-low border-transparent rounded-lg text-sm font-semibold" type="date" value="2023-10-27"/>
+<input id="stock-in-date" class="w-full pl-10 pr-4 py-2.5 bg-surface-container-low border-transparent rounded-lg text-sm font-semibold" type="date" value="2023-10-27"/>
 </div>
 </div>
 <div>
@@ -298,18 +297,18 @@
 <div class="space-y-4 relative z-10">
 <div class="flex justify-between border-b border-white/10 pb-2">
 <span class="text-xs font-medium opacity-80">Receiving Clerk</span>
-<span class="text-xs font-bold">A. Miller</span>
+<span id="summary-clerk" class="text-xs font-bold">A. Miller</span>
 </div>
 <div class="flex justify-between border-b border-white/10 pb-2">
 <span class="text-xs font-medium opacity-80">Expected Value</span>
-<span class="text-xs font-bold">$4,850.00</span>
+<span id="summary-value" class="text-xs font-bold">$0.00</span>
 </div>
 <div class="flex justify-between">
 <span class="text-xs font-medium opacity-80">Space Utilization</span>
-<span class="text-xs font-bold">0.4m³</span>
+<span id="summary-utilization" class="text-xs font-bold">0.0m³</span>
 </div>
 </div>
-<button class="w-full mt-8 py-4 bg-white text-primary rounded-lg font-manrope font-extrabold text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2">
+<button id="stock-in-submit" class="w-full mt-8 py-4 bg-white text-primary rounded-lg font-manrope font-extrabold text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2">
 <span>Complete Stock In</span>
 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </button>
@@ -327,10 +326,35 @@
 </div>
 </div>
 </div>
+
+<!-- Recent Transactions Section -->
+<div class="mt-12 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-12">
+<div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+<h3 class="font-manrope font-bold text-slate-800">Recent Transactions</h3>
+<button class="text-primary text-xs font-bold hover:underline">View All Records</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50">
+<th class="px-6 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Transaction ID</th>
+<th class="px-6 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Supplier</th>
+<th class="px-6 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Received Date</th>
+<th class="px-6 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Items</th>
+<th class="px-6 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider text-right">Status</th>
+</tr>
+</thead>
+<tbody id="recent-transactions-list">
+<tr>
+<td colspan="5" class="px-6 py-8 text-center text-slate-400 text-sm">Loading recent transactions...</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </section>
 </main>
-<!-- Floating Action Button for Emergency Logs (Optional/Shared) -->
-<button class="fixed bottom-8 right-8 w-14 h-14 bg-error text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-50">
-<span class="material-symbols-outlined">report_problem</span>
-</button>
+<script src="../../scripts/services/api.js"></script>
+<script src="../../scripts/services/shell.js"></script>
+<script src="../../scripts/pages/stockInPage.js"></script>
 </body></html>

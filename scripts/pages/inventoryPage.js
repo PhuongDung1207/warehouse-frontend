@@ -75,10 +75,12 @@
 
   function renderStocktakeItems(shell) {
     const itemsRoot = document.getElementById("inventory-stocktake-items");
-    const candidateRows = state.stockRows.slice(0, 5);
+    if (!itemsRoot) return;
 
+    const candidateRows = state.stockRows.slice(0, 5);
     itemsRoot.innerHTML = candidateRows
       .map(function (row) {
+        // ... (kế thừa logic cũ nhưng bọc trong check itemsRoot)
         const product = row.product || {};
         const quantity = Number(row.quantityOnHand || row.quantity_on_hand || 0);
 
@@ -125,34 +127,39 @@
       }).join("");
     }
 
-    document.getElementById("inventory-table-summary").textContent =
-      "Showing " +
-      shell.formatNumber(stocks.length) +
-      " of " +
-      shell.formatNumber(total) +
-      " items";
+    const summaryEl = document.getElementById("inventory-table-summary");
+    if (summaryEl) {
+      summaryEl.textContent =
+        "Showing " +
+        shell.formatNumber(stocks.length) +
+        " of " +
+        shell.formatNumber(total) +
+        " items";
+    }
 
     renderStocktakeItems(shell);
   }
 
   function renderCategoryFilter(categories) {
     const select = document.getElementById("inventory-category-filter");
-    const options = ['<option value="">All Categories</option>']
-      .concat(
-        categories.map(function (category) {
-          return (
-            '<option value="' +
-            category.id +
-            '">' +
-            category.name +
-            "</option>"
-          );
-        })
-      )
-      .join("");
+    if (select) {
+      const options = ['<option value="">All Categories</option>']
+        .concat(
+          categories.map(function (category) {
+            return (
+              '<option value="' +
+              category.id +
+              '">' +
+              category.name +
+              "</option>"
+            );
+          })
+        )
+        .join("");
 
-    select.innerHTML = options;
-    select.value = state.query.categoryId || "";
+      select.innerHTML = options;
+      select.value = state.query.categoryId || "";
+    }
   }
 
   function renderProductFormOptions() {
@@ -263,28 +270,33 @@
     const lowStockData = lowStockPayload.data || {};
     const dashboardData = dashboardPayload.data || {};
     const categories =
-      Array.isArray(categoriesPayload.data) && categoriesPayload.data.length > 0
+      (categoriesPayload && Array.isArray(categoriesPayload.data) && categoriesPayload.data.length > 0)
         ? categoriesPayload.data
         : MOCK_CATEGORIES;
-    const units =
-      Array.isArray(unitsPayload.data) && unitsPayload.data.length > 0
-        ? unitsPayload.data
-        : MOCK_UNITS;
+
+    // Fixed to use MOCK_UNITS as requested by the user
+    const units = MOCK_UNITS;
 
     state.categories = categories;
     state.units = units;
 
-    document.getElementById("inventory-total-skus").textContent =
-      shell.formatNumber(stocksData.total);
-    document.getElementById("inventory-low-stock").textContent =
-      shell.formatNumber(lowStockData.total);
-    document.getElementById("inventory-pending-checks").textContent =
-      shell.formatNumber(
+    const totalSkusEl = document.getElementById("inventory-total-skus");
+    const lowStockEl = document.getElementById("inventory-low-stock");
+    const pendingChecksEl = document.getElementById("inventory-pending-checks");
+    const auditorNameEl = document.getElementById("inventory-auditor-name");
+
+    if (totalSkusEl) totalSkusEl.textContent = shell.formatNumber(stocksData.total);
+    if (lowStockEl) lowStockEl.textContent = shell.formatNumber(lowStockData.total);
+    if (pendingChecksEl) {
+      pendingChecksEl.textContent = shell.formatNumber(
         dashboardData.overview && dashboardData.overview.pendingStockChecks
       );
-    document.getElementById("inventory-auditor-name").value =
-      (state.currentUser && (state.currentUser.fullName || state.currentUser.username)) ||
-      "Warehouse User";
+    }
+    if (auditorNameEl) {
+      auditorNameEl.value =
+        (state.currentUser && (state.currentUser.fullName || state.currentUser.username)) ||
+        "Warehouse User";
+    }
 
     renderCategoryFilter(categories);
     renderProductFormOptions();
@@ -369,22 +381,27 @@
     const searchInput = document.getElementById("inventory-search-input");
     const categoryFilter = document.getElementById("inventory-category-filter");
     const productForm = document.getElementById("product-form");
+    const stocktakeModal = document.getElementById("stocktake-modal");
     let searchTimeout = null;
 
-    searchInput.addEventListener("input", function () {
-      window.clearTimeout(searchTimeout);
-      searchTimeout = window.setTimeout(function () {
-        state.query.keyword = searchInput.value.trim();
+    if (searchInput) {
+      searchInput.addEventListener("input", function () {
+        window.clearTimeout(searchTimeout);
+        searchTimeout = window.setTimeout(function () {
+          state.query.keyword = searchInput.value.trim();
+          state.query.offset = 0;
+          loadInventoryData(api, shell).catch(console.error);
+        }, 250);
+      });
+    }
+
+    if (categoryFilter) {
+      categoryFilter.addEventListener("change", function () {
+        state.query.categoryId = categoryFilter.value;
         state.query.offset = 0;
         loadInventoryData(api, shell).catch(console.error);
-      }, 250);
-    });
-
-    categoryFilter.addEventListener("change", function () {
-      state.query.categoryId = categoryFilter.value;
-      state.query.offset = 0;
-      loadInventoryData(api, shell).catch(console.error);
-    });
+      });
+    }
 
     window.submitStocktake = function () {
       submitStocktake(api).catch(function (error) {

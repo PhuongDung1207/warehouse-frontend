@@ -150,13 +150,17 @@
       return;
     }
 
-    const [dashboardPayload, lowStockPayload, suppliersPayload, chartPayload] =
-      await Promise.all([
-        api.getDashboardReport(),
-        api.getLowStocks({ limit: 5, offset: 0 }),
-        api.listSuppliersPage({ page: 1, limit: 1 }),
-        api.getStockMovementChart({ groupBy: "day" })
-      ]);
+    const results = await Promise.allSettled([
+      api.getDashboardReport(),
+      api.getLowStocks({ limit: 5, offset: 0 }),
+      api.listSuppliersPage({ page: 1, limit: 1 }),
+      api.getStockMovementChart({ groupBy: "day" })
+    ]);
+
+    const dashboardPayload = results[0].status === "fulfilled" ? results[0].value : { data: {} };
+    const lowStockPayload = results[1].status === "fulfilled" ? results[1].value : { data: {} };
+    const suppliersPayload = results[2].status === "fulfilled" ? results[2].value : { meta: {} };
+    const chartPayload = results[3].status === "fulfilled" ? results[3].value : { data: {} };
 
     const dashboardData = dashboardPayload.data || {};
     const overview = dashboardData.overview || {};
