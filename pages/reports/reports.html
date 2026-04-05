@@ -102,74 +102,62 @@
 </head>
 <body class="bg-surface font-body text-on-surface selection:bg-primary-fixed-dim">
 
-<!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-200/50 dark:border-slate-800/50 bg-slate-50 dark:bg-slate-950 flex flex-col h-full py-4 gap-1 z-50 overflow-y-auto custom-scrollbar">
-<div class="px-6 mb-8 flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
-</div>
-<div>
-<h1 class="font-bold text-lg text-cyan-900 dark:text-cyan-50 font-headline">Logictisc Web</h1>
-<p class="text-[10px] uppercase tracking-widest text-secondary">Inventory Management</p>
-</div>
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-slate-200/50 bg-slate-50 flex flex-col py-4 gap-1 z-50">
+<div class="px-6 mb-8 text-nowrap">
+<h1 class="font-manrope font-bold text-lg text-cyan-900">Precision Ledger</h1>
+<p class="text-xs text-slate-500 font-medium tracking-wide">INVENTORY MANAGEMENT</p>
 </div>
 <nav class="flex-1 space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard.html">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 hover:bg-slate-200/50 transition-all mx-2 rounded-lg" href="../dashboard/dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
 <span class="font-manrope text-sm font-medium">Dashboard</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 hover:bg-slate-200/50 transition-all mx-2 rounded-lg" href="../inventory/categories.html">
 <span class="material-symbols-outlined">category</span>
 <span class="font-manrope text-sm font-medium">Categories</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
-<span class="material-symbols-outlined">storage</span>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 hover:bg-slate-200/50 transition-all mx-2 rounded-lg" href="../inventory/inventory.html">
+<span class="material-symbols-outlined">inventory_2</span>
 <span class="font-manrope text-sm font-medium">Storage</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="inventory.html">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 hover:bg-slate-200/50 transition-all mx-2 rounded-lg" href="../inventory/products.html">
 <span class="material-symbols-outlined">inventory</span>
 <span class="font-manrope text-sm font-medium">Products</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 hover:bg-slate-200/50 transition-all mx-2 rounded-lg" href="../inventory/suppliers.html">
 <span class="material-symbols-outlined">local_shipping</span>
 <span class="font-manrope text-sm font-medium">Suppliers</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 hover:bg-slate-200/50 transition-all mx-2 rounded-lg" href="../inventory/stock_in.html">
 <span class="material-symbols-outlined">input</span>
 <span class="font-manrope text-sm font-medium">Stock In</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 hover:bg-slate-200/50 transition-all mx-2 rounded-lg" href="../inventory/stock_out.html">
 <span class="material-symbols-outlined">output</span>
 <span class="font-manrope text-sm font-medium">Stock Out</span>
 </a>
-<!-- Active: Reports -->
-<a class="flex items-center gap-3 px-4 py-3 bg-cyan-100/50 dark:bg-cyan-900/30 text-cyan-900 dark:text-cyan-100 rounded-lg mx-2 transition-all scale-[0.98] active:scale-95 duration-150" href="reports.html">
+<!-- Active State: Reports -->
+<a class="flex items-center gap-3 px-4 py-3 bg-cyan-100/50 text-cyan-900 rounded-lg mx-2 transition-all" href="#">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
-<span class="font-manrope text-sm font-medium">Reports</span>
+<span class="font-manrope text-sm font-semibold">Reports</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 hover:bg-slate-200/50 transition-all mx-2 rounded-lg" href="../settings/team.html">
 <span class="material-symbols-outlined">group</span>
 <span class="font-manrope text-sm font-medium">Users</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockin.html">
-<span class="material-symbols-outlined">download</span>
-<span class="font-manrope text-sm font-medium">DashBoard StockIn</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockout.html">
-<span class="material-symbols-outlined">local_shipping</span>
-<span class="font-manrope text-sm font-medium">DashBoard StockOut</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:text-cyan-800 hover:bg-slate-200/50 transition-all mx-2 rounded-lg" href="#">
 <span class="material-symbols-outlined">settings</span>
 <span class="font-manrope text-sm font-medium">Settings</span>
 </a>
 </nav>
-<div class="mt-auto px-4 py-4 mx-2 bg-white dark:bg-slate-900 rounded-xl shadow-sm">
-<div class="flex items-center gap-3">
-<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDpmTUEsQvrwvZ1fT-xyiREzaBOPFbj2OFCtNkczz1uqHHOd4QbdjcM0CjpuqW3w-gmqByd3oGY_raSVCbq04sIOaDblVfZ48Cw2jXy4a_oCCbEFjR5Jckm5D5kVDbvAyL-vSAqcW1Kt3iHfB6Vg8datWPqdi8zquoqOGfCeOyUDjeqz60y4Oicz5t0MrtE5vaSz17cc1txmRZSijFvkN4tLAkddUWSKKX6OeUyVI9h2YQvevTfL-sPraPX6TfyT_-aVgrTt18pXfo"/>
-<div class="flex-1 min-w-0">
-<p class="text-xs font-bold truncate" data-user-name>Alex Sterling</p>
-<p class="text-[10px] text-secondary truncate" data-user-role>Inventory Manager</p>
+
+<div class="px-4 mt-auto pt-4 border-t border-slate-200/50">
+<div class="flex items-center gap-3 p-2 bg-white rounded-xl shadow-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs">AD</div>
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-cyan-900">Admin User</span>
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Super Admin</span>
 </div>
 </div>
 </div>
@@ -178,11 +166,11 @@
 <!-- Main Content Area -->
 <main class="ml-64 flex flex-col min-h-screen">
     <!-- TopAppBar -->
-    <header class="sticky top-0 z-40 w-full border-b border-slate-200/50 dark:border-slate-800/50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm dark:shadow-none flex items-center justify-between px-8 h-16 w-full">
+    <header class="sticky top-0 z-40 w-full border-b border-slate-200/50 bg-white/80 backdrop-blur-md shadow-sm flex items-center justify-between px-8 h-16">
         <div class="flex items-center gap-8 flex-1">
             <div class="relative w-80">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">calendar_month</span>
-                <select class="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 transition-all font-medium text-secondary outline-none cursor-pointer">
+                <select class="w-full bg-slate-100 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-0 transition-all font-medium text-secondary outline-none cursor-pointer">
                     <option>This Month (October)</option>
                     <option>Last Month (September)</option>
                     <option>This Year (2026)</option>
@@ -190,13 +178,13 @@
             </div>
         </div>
         <div class="flex items-center gap-4">
-            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+            <button class="p-2 text-slate-500 hover:bg-slate-100 transition-colors duration-200 rounded-full active:scale-95">
                 <span class="material-symbols-outlined">notifications</span>
             </button>
-            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+            <button class="p-2 text-slate-500 hover:bg-slate-100 transition-colors duration-200 rounded-full active:scale-95">
                 <span class="material-symbols-outlined">help</span>
             </button>
-            <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 rounded-full active:scale-95">
+            <button class="p-2 text-slate-500 hover:bg-slate-100 transition-colors duration-200 rounded-full active:scale-95">
                 <span class="material-symbols-outlined">account_circle</span>
             </button>
         </div>
@@ -212,11 +200,11 @@
                 <p class="text-secondary mt-1">Movement and valuation metrics.</p>
             </div>
             <div class="flex gap-3">
-                <button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-highest text-primary font-semibold rounded-lg hover:bg-surface-container-high transition-colors active:scale-95" id="reports-export-pdf">
+                <button class="flex items-center gap-2 px-5 py-2.5 bg-slate-100 text-primary font-semibold rounded-lg hover:bg-slate-200 transition-colors active:scale-95" id="reports-export-pdf">
                     <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
                     <span>Export PDF</span>
                 </button>
-                <button class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-b from-green-600 to-green-700 text-white font-semibold rounded-lg shadow-lg shadow-green-600/20 transition-transform active:scale-95" id="reports-export-excel">
+                <button class="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 text-white font-semibold rounded-lg shadow-lg shadow-emerald-600/20 transition-transform active:scale-95 hover:bg-emerald-700" id="reports-export-excel">
                     <span class="material-symbols-outlined text-sm">table_view</span>
                     <span>Export Excel</span>
                 </button>
@@ -225,42 +213,42 @@
 
         <!-- Metrics Overview -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100 relative">
-                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Total In/Out</p>
+            <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm relative overflow-hidden group">
+                <p class="text-slate-500 font-label text-xs uppercase tracking-wider font-semibold">Total In/Out</p>
                 <div class="mt-2 flex gap-4">
                     <div>
-                        <p class="text-[10px] text-green-600 font-bold mb-1 uppercase">Inbound</p>
-                        <h3 class="text-xl font-extrabold font-headline text-on-surface"><span id="reports-inbound-qty">--</span> <span class="text-xs text-secondary font-medium">units</span></h3>
+                        <p class="text-[10px] text-emerald-600 font-bold mb-1 uppercase">Inbound</p>
+                        <h3 class="text-xl font-extrabold font-headline text-cyan-950"><span id="reports-inbound-qty">--</span> <span class="text-xs text-slate-500 font-medium">units</span></h3>
                     </div>
                     <div class="w-px bg-slate-100"></div>
                     <div>
                         <p class="text-[10px] text-orange-600 font-bold mb-1 uppercase">Outbound</p>
-                        <h3 class="text-xl font-extrabold font-headline text-on-surface"><span id="reports-outbound-qty">--</span> <span class="text-xs text-secondary font-medium">units</span></h3>
+                        <h3 class="text-xl font-extrabold font-headline text-cyan-950"><span id="reports-outbound-qty">--</span> <span class="text-xs text-slate-500 font-medium">units</span></h3>
                     </div>
                 </div>
             </div>
-            <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100">
-                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Top Performing Category</p>
+            <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                <p class="text-slate-500 font-label text-xs uppercase tracking-wider font-semibold">Top Performing Category</p>
                 <h3 class="text-2xl font-extrabold font-headline text-primary mt-2" id="reports-top-category">--</h3>
-                <p class="text-sm text-secondary mt-1" id="reports-top-category-caption">Loading category performance.</p>
+                <p class="text-sm text-slate-500 mt-1" id="reports-top-category-caption">Loading category performance.</p>
             </div>
-            <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100">
-                <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Stock On Hand</p>
+            <div class="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                <p class="text-slate-500 font-label text-xs uppercase tracking-wider font-semibold">Stock On Hand</p>
                 <h3 class="text-3xl font-extrabold font-headline text-primary mt-2" id="reports-on-hand">--</h3>
-                <p class="text-xs text-primary-fixed-dim mt-1 font-medium" id="reports-on-hand-caption">Loading stock availability.</p>
+                <p class="text-xs text-slate-400 mt-1 font-medium" id="reports-on-hand-caption">Loading stock availability.</p>
             </div>
         </div>
 
         <!-- Charts Row -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-slate-50">
-                <h4 class="text-lg font-bold font-headline mb-4 text-on-surface">Inbound vs Outbound Trend</h4>
+            <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <h4 class="text-lg font-bold font-headline mb-4 text-cyan-950">Inbound vs Outbound Trend</h4>
                 <div class="relative h-64 w-full">
                     <canvas id="trendChart"></canvas>
                 </div>
             </div>
-            <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border border-slate-50">
-                <h4 class="text-lg font-bold font-headline mb-4 text-on-surface">Stock by Category</h4>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+                <h4 class="text-lg font-bold font-headline mb-4 text-cyan-950">Stock by Category</h4>
                 <div class="relative h-64 w-full flex justify-center">
                     <canvas id="categoryChart"></canvas>
                 </div>
@@ -295,7 +283,7 @@
                 },
                 {
                     label: 'Inventory Level',
-                    data: [5400, 6100, 5600, 6110], // Nhập - Xuất - Tồn mapping Example
+                    data: [5400, 6100, 5600, 6110], 
                     borderColor: '#176684',
                     borderDash: [2, 2],
                     tension: 0.4,
@@ -313,7 +301,7 @@
             labels: ['Bearings', 'Fluids', 'Machinery', 'Tools'],
             datasets: [{
                 data: [45, 25, 20, 10],
-                backgroundColor: ['#004f69', '#1a6886', '#8dcff2', '#e1e3e4'],
+                backgroundColor: ['#004f69', '#1a6886', '#8dcff2', '#eceeef'],
                 borderWidth: 0
             }]
         },
