@@ -3,7 +3,7 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>The Precision Ledger - Dashboard</title>
+<title>Logictisc Web - Dashboard</title>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -105,7 +105,7 @@
 <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
 </div>
 <div>
-<h1 class="font-bold text-lg text-cyan-900 dark:text-cyan-50 font-headline">The Precision Ledger</h1>
+<h1 class="font-bold text-lg text-cyan-900 dark:text-cyan-50 font-headline">Logictisc Web</h1>
 <p class="text-[10px] uppercase tracking-widest text-secondary">Inventory Management</p>
 </div>
 </div>
@@ -147,6 +147,14 @@
 <span class="material-symbols-outlined">group</span>
 <span class="font-manrope text-sm font-medium">Users</span>
 </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockin.html">
+<span class="material-symbols-outlined">download</span>
+<span class="font-manrope text-sm font-medium">DashBoard StockIn</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="dashboard-stockout.html">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="font-manrope text-sm font-medium">DashBoard StockOut</span>
+</a>
 <a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:text-cyan-800 dark:hover:text-cyan-200 mx-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-150 active:scale-95" href="#">
 <span class="material-symbols-outlined">settings</span>
 <span class="font-manrope text-sm font-medium">Settings</span>
@@ -156,8 +164,8 @@
 <div class="flex items-center gap-3">
 <img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-container" data-alt="close up professional headshot of a person with friendly expression in office setting soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDpmTUEsQvrwvZ1fT-xyiREzaBOPFbj2OFCtNkczz1uqHHOd4QbdjcM0CjpuqW3w-gmqByd3oGY_raSVCbq04sIOaDblVfZ48Cw2jXy4a_oCCbEFjR5Jckm5D5kVDbvAyL-vSAqcW1Kt3iHfB6Vg8datWPqdi8zquoqOGfCeOyUDjeqz60y4Oicz5t0MrtE5vaSz17cc1txmRZSijFvkN4tLAkddUWSKKX6OeUyVI9h2YQvevTfL-sPraPX6TfyT_-aVgrTt18pXfo"/>
 <div class="flex-1 min-w-0">
-<p class="text-xs font-bold truncate">Alex Sterling</p>
-<p class="text-[10px] text-secondary truncate">Inventory Manager</p>
+<p class="text-xs font-bold truncate" data-user-name>Alex Sterling</p>
+<p class="text-[10px] text-secondary truncate" data-user-role>Inventory Manager</p>
 </div>
 </div>
 </div>
@@ -214,8 +222,8 @@
 </div>
 <div>
 <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Total Products</p>
-<h3 class="text-3xl font-extrabold font-headline text-primary mt-1">12,482</h3>
-<p class="text-[10px] text-primary mt-2 flex items-center gap-1 font-medium">
+<h3 class="text-3xl font-extrabold font-headline text-primary mt-1" id="dashboard-total-products">--</h3>
+<p class="text-[10px] text-primary mt-2 flex items-center gap-1 font-medium" id="dashboard-total-products-caption">
 <span class="material-symbols-outlined text-[12px]">trending_up</span>
                                 +4.2% from last month
                             </p>
@@ -231,8 +239,8 @@
 </div>
 <div>
 <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Low Stock Alerts</p>
-<h3 class="text-3xl font-extrabold font-headline text-error mt-1">18</h3>
-<p class="text-[10px] text-error mt-2 flex items-center gap-1 font-medium">
+<h3 class="text-3xl font-extrabold font-headline text-error mt-1" id="dashboard-low-stock">--</h3>
+<p class="text-[10px] text-error mt-2 flex items-center gap-1 font-medium" id="dashboard-low-stock-caption">
 <span class="material-symbols-outlined text-[12px]">priority_high</span>
                                 Requires immediate attention
                             </p>
@@ -248,8 +256,8 @@
 </div>
 <div>
 <p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Suppliers</p>
-<h3 class="text-3xl font-extrabold font-headline text-primary mt-1">84</h3>
-<p class="text-[10px] text-secondary mt-2 flex items-center gap-1 font-medium">
+<h3 class="text-3xl font-extrabold font-headline text-primary mt-1" id="dashboard-suppliers">--</h3>
+<p class="text-[10px] text-secondary mt-2 flex items-center gap-1 font-medium" id="dashboard-suppliers-caption">
 <span class="material-symbols-outlined text-[12px]">check_circle</span>
                                 3 new onboarded this week
                             </p>
@@ -264,9 +272,9 @@
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
 </div>
 <div>
-<p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">Total Value</p>
-<h3 class="text-3xl font-extrabold font-headline text-primary mt-1">$4.2M</h3>
-<p class="text-[10px] text-primary mt-2 flex items-center gap-1 font-medium">
+<p class="text-secondary font-label text-xs uppercase tracking-wider font-semibold">This Month Inbound</p>
+<h3 class="text-3xl font-extrabold font-headline text-primary mt-1" id="dashboard-stock-in-amount">--</h3>
+<p class="text-[10px] text-primary mt-2 flex items-center gap-1 font-medium" id="dashboard-stock-in-caption">
 <span class="material-symbols-outlined text-[12px]">trending_up</span>
                                 +12% YoY growth
                             </p>
@@ -293,7 +301,7 @@
 </div>
 </div>
 <!-- Visual Chart Placeholder -->
-<div class="h-64 flex items-end justify-between gap-4 px-2 relative border-b border-slate-100">
+<div class="h-64 flex items-end justify-between gap-4 px-2 relative border-b border-slate-100" id="dashboard-movement-chart">
 <div class="absolute inset-0 flex flex-col justify-between py-1">
 <div class="w-full border-t border-slate-100/50"></div>
 <div class="w-full border-t border-slate-100/50"></div>
@@ -390,7 +398,7 @@
 <h4 class="text-lg font-bold font-headline">Recent Activity</h4>
 <button class="text-primary text-sm font-semibold hover:underline">View All Log</button>
 </div>
-<div class="divide-y divide-slate-50">
+<div class="divide-y divide-slate-50" id="dashboard-activities">
 <!-- Activity Item 1 -->
 <div class="p-6 flex items-start gap-4 hover:bg-slate-50 transition-colors">
 <div class="mt-1 w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-800">
@@ -456,4 +464,7 @@
 <span class="material-symbols-outlined">add</span>
 </button>
 </div>
+<script src="../../scripts/services/api.js"></script>
+<script src="../../scripts/services/shell.js"></script>
+<script src="../../scripts/pages/dashboardPage.js"></script>
 </body></html>

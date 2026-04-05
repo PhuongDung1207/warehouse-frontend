@@ -3,7 +3,9 @@
 
   function createNavItem(item) {
     return (
-      '<a href="#" class="nav-link' +
+      '<a href="' +
+      (item.href || "#") +
+      '" class="nav-link' +
       (item.active ? " active" : "") +
       '"' +
       (item.active ? ' aria-current="page"' : "") +
@@ -38,7 +40,7 @@
           <strong>${currentUser.name}</strong>
           <span>${currentUser.role}</span>
         </div>
-        <button class="logout-btn" type="button" aria-label="Log out">
+        <button class="logout-btn" type="button" aria-label="Log out" data-href="/pages/auth/login.html">
           <svg viewBox="0 0 24 24">
             <path d="M14 7l5 5-5 5M19 12H9M10 5H5v14h5" />
           </svg>

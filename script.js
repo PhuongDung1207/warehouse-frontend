@@ -50,6 +50,23 @@
   function initialize() {
     renderShell();
 
+    document.addEventListener("click", function (event) {
+      const navigationTarget = event.target.closest("[data-href]");
+
+      if (!navigationTarget) {
+        return;
+      }
+
+      const href = navigationTarget.getAttribute("data-href");
+
+      if (!href) {
+        return;
+      }
+
+      event.preventDefault();
+      window.location.assign(href);
+    });
+
     const elements = getElements();
     const store = app.createProductStore({
       inventoryBatches: app.inventoryBatches,
