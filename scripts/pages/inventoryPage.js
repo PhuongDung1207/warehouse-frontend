@@ -12,18 +12,18 @@
     stockRows: []
   };
   const MOCK_CATEGORIES = [
-    { id: 101, name: "Bearings" },
-    { id: 102, name: "Fluids" },
-    { id: 103, name: "Machinery" },
-    { id: 104, name: "Electrical" },
-    { id: 105, name: "Packaging" }
+    { id: 1, name: "Bearings" },
+    { id: 2, name: "Fluids" },
+    { id: 3, name: "Machinery" },
+    { id: 4, name: "Electrical" },
+    { id: 5, name: "Packaging" }
   ];
   const MOCK_UNITS = [
-    { id: 201, name: "Pieces", symbol: "pcs" },
-    { id: 202, name: "Liters", symbol: "L" },
-    { id: 203, name: "Units", symbol: "unit" },
-    { id: 204, name: "Boxes", symbol: "box" },
-    { id: 205, name: "Kilograms", symbol: "kg" }
+    { id: 1, name: "Pieces", symbol: "pcs" },
+    { id: 2, name: "Liters", symbol: "L" },
+    { id: 3, name: "Units", symbol: "unit" },
+    { id: 4, name: "Boxes", symbol: "box" },
+    { id: 5, name: "Kilograms", symbol: "kg" }
   ];
 
   function getStatusMarkup(quantity, minLevel) {
@@ -274,8 +274,10 @@
         ? categoriesPayload.data
         : MOCK_CATEGORIES;
 
-    // Fixed to use MOCK_UNITS as requested by the user
-    const units = MOCK_UNITS;
+    const units =
+      (unitsPayload && Array.isArray(unitsPayload.data) && unitsPayload.data.length > 0)
+        ? unitsPayload.data
+        : MOCK_UNITS;
 
     state.categories = categories;
     state.units = units;
